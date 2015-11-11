@@ -1,0 +1,462 @@
+
+% ------------------------------
+% LE PREAMBULE
+% ------------------------------
+\documentclass[a4paper]{report}
+\usepackage{float}
+\usepackage{longtable}
+% ------------------------------
+% PACKAGES DE BASE
+% ------------------------------
+\usepackage[utf8]{inputenc} % Encodage des caract?πres
+\usepackage[T1]{fontenc} % Encodage de la police (?)
+\usepackage[frenchb]{babel} % Langue fran?ßaise
+\usepackage{subfigure}
+\usepackage[final]{pdfpages} 
+
+% ------------------------------
+% HYPERREF
+% ------------------------------
+\usepackage[colorlinks=true,urlcolor=black,linkcolor=black]{hyperref} % Liens
+%interactifs
+\hypersetup{pdfauthor={AUTEUR},pdftitle={TITRE},pdfkeywords={MOTS
+CLES},pdfsubject={SUJET}} % M??tadonn??e du pdf
+
+% ------------------------------
+% RECTIFICATIONS DIVERSES
+% ------------------------------
+\usepackage{lmodern} % Police vectorielle
+\usepackage[paper=a4paper]{geometry} % Feuille A4 avec marges europ??ennes
+
+% ------------------------------
+% PETITES MACRO EN TOUT GENRE
+% ------------------------------
+
+% Ajout automatique des \section* ? la toc
+%\makeatletter
+
+%\newcommand{\section@star}[1]{\old@section*{#1}\addcontentsline{toc}{section}{#1}}
+%\renewcommand{\section}{\@ifstar{\section@star}{\old@section}}
+%\makeatother
+
+% ------------------------------
+% MATHS
+% ------------------------------
+\usepackage{amsmath} % Les math : 
+
+%BRYAN lien chouette pour vite apprendre 
+% a utiliser : https://www.sharelatex.com/learn/Aligning_equations_with_amsmath 
+%utiliser \eqref{}=(\ref{})
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% cfr (subeqn.tex) pour voir comment bien utiliser les environnements disponibles
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{MaxMatrixCols}{20}
+\usepackage{esint} % Int??grales multiples
+\usepackage{amssymb} % Symboles math
+\usepackage{esvect} % Vecteurs
+\usepackage{tensor}
+\usepackage{cancel}
+\usepackage[original]{pict2e} % probleme, cancel marche pas sinon. Un package doit sans doute toucher à pict2e (http://tex.stackexchange.com/questions/106275/problem-packages-diagbox-and-cancel)
+% ------------------------------
+% TABLEAUX
+% ------------------------------
+\usepackage{array}
+\usepackage{cellspace} % Espace entre le texte et les bord des cellules
+%\usepackage{tabularx} % Tableau avec largeur fix??e
+%\addparagraphcolumntypes{X}
+%\cellspacetoplimit=2pt
+%\cellspacebottomlimit=2pt
+\usepackage{makecell}
+\usepackage{multirow}
+% ------------------------------
+% DIVERS (graphique, url,
+% annexe, .eps, code)
+% ------------------------------\\
+%\usepackage{pstricks}
+%\usepackage{pst-plot,pst-node}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{appendix}
+\usepackage{subfigure}
+\usepackage{pgfplots}
+\usepackage{epstopdf}
+\usepackage{listings}
+\usepackage{lipsum}
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usepackage{colortbl}
+\usepackage{qtree}
+\usepackage{color}
+\usepackage{ gensymb }
+
+\usepackage{color}
+% ------------------------------
+% OPERATEURS MATHEMATIQUES
+% ------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%RAJOUT DE BRYAN, pour l'electromagnetisme
+%%%% tips : ctrl + i,b = italique, gras (bold)
+%%%% tips' : mettre le label juste après \begin{(equation par ex)} pour lisibilité
+
+%vecteurs souvent utilise mis en gras
+
+\newcommand{\A}{\mathbf{A}} %pot vect
+\newcommand{\B}{\mathbf{B}} %induct magn !!
+\newcommand{\DE}{\mathbf{D}} %deplacmt elec
+\newcommand{\E}{\mathbf{E}} %chmp elec
+\newcommand{\F}{\mathbf{F}} %force
+\newcommand{\HB}{\mathbf{H}} % chmp magn
+\newcommand{\J}{\mathbf{J}} %courant 
+\newcommand{\konde}{\mathbf{k}} %vecteur d'onde
+\newcommand{\M}{\mathbf{M}} %magnetisation
+\newcommand{\n}{\mathbf{n}} %vecteur normal
+\newcommand{\Po}{\mathbf{P}} %polarisation
+\newcommand{\dip}{\mathbf{p}} % qt mvmt ou dipole
+\newcommand{\Poynt}{\mathbf{S}} %poynting
+\newcommand{\x}{\mathbf{x}}
+
+
+%abreviation transformer automatiquement en mots
+
+
+\newcommand{\combili}{combinaison linéaire }
+\newcommand{\EqMax}{équations de Maxwell }
+\newcommand{\Em}{électromagnétique } % a utiliser "champ electromagnetique"
+\newcommand{\Ems}{électromagnétiques } % a utiliser "champs electromagnetiques"
+\newcommand{\vap}{valeur propre }
+\newcommand{\vaps}{valeurs propres }
+\newcommand{\vep}{vecteur propre }
+\newcommand{\veps}{vecteurs propres }
+\newcommand{\ECOC}{ensemble complet d'observables qui commutent }
+
+
+\newcommand{\EMC}{électromagnétique classique }
+\newcommand{\EM}{électromagnétisme }
+\newcommand{\QED}{électrodynamique quantique }
+\newcommand{\MQ}{mécanique quantique }
+\newcommand{\RR}{relativité restreinte }
+\newcommand{\RG}{relativité générale }
+\newcommand{\TQC}{théorie quantique des champs }
+
+\newcommand{\bcp}{beaucoup }
+\newcommand{\dvlp}{développement }
+\newcommand{\mvmt}{mouvement }
+\newcommand{\mmt}{moment }
+\newcommand{\cad}{c'est à dire }
+\newcommand{\tjrs}{toujours }
+\newcommand{\pdt}{pendant }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Ensembles
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+% Fonctions trigo
+\DeclareMathOperator{\asin}{asin}
+\DeclareMathOperator{\acos}{acos}
+\DeclareMathOperator{\atan}{atan}
+\DeclareMathOperator{\acot}{acot}
+\DeclareMathOperator{\cis}{cis}
+
+
+% Matrices, applications lin??aires et op??rations sur les ensembles
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\newdet}{det}
+\DeclareMathOperator{\newker}{Ker}
+\DeclareMathOperator{\newim}{Im}
+\DeclareMathOperator{\newdim}{dim}
+\DeclareMathOperator{\newrang}{rang}
+\DeclareMathOperator{\newint}{int}
+\usepackage{hhline}
+% Divers
+\DeclareMathOperator{\dis}{d}
+\DeclareMathOperator{\p}{p}
+\DeclareMathOperator{\dom}{dom}
+\usepackage{vmargin}
+\usepackage[final]{pdfpages}
+\usepackage{titlesec}
+\usepackage{ stmaryrd }
+\usepackage{delarray}
+
+
+% Nouvelles commandes (MODIFICATION BRYAN DIV ROT )
+\newcommand{\dif}{\mathrm{d}} %%% ON NOTE LES d GRACE A CA SINON ITALIQUE. ATTENTION METTRE \; DANS LES INTEGRALE POUR ESPACER, SINON COLLE !!
+\renewcommand{\div}{\mathbf{\nabla} \cdot}
+\newcommand{\rot}{ \mathbf{\nabla} \times}
+\newcommand{\divp}{\mathbf{\nabla}' \cdot}
+\newcommand{\rotp}{ \mathbf{\nabla}' \times}
+\newcommand{\grad}{ \mathbf{\nabla}}
+\newcommand{\gradp}{ \mathbf{\nabla}'}
+\renewcommand{\i}{\mathrm{i}}
+\newcommand{\pa}{\partial}
+\usetikzlibrary{arrows,shadows}
+\tikzset{every picture/.style={execute at begin picture={
+   \shorthandoff{:;!?};}
+}}
+
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[frenchb]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{longtable}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\usepackage{numprint}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage[nottoc, notlof, notlot]{tocbibind}
+
+\renewcommand{\bibname}{R\'ef\'erences}
+%\renewcommand{\refname}{R\'ef\'erences}
+\begin{document}
+\def\w{\par \vspace{\baselineskip}}
+\renewcommand{\bibname}{R\'ef\'erences}
+  \begin{titlepage}
+  \begin{center}
+%\maketitle
+% Upper part of the page
+
+\textsc{\Large Université Catholique de Louvain }\\[0.5cm]
+\w
+\w
+\textsc{\huge LPHY2131 : Particle Physics I }\\[0.34cm]
+\textsc{\large Laboratoire Numérique : masses des bosons Z et W.}\\[0.7cm]
+\textsc{\large Année académique 2015-2016}\\[0.7cm]
+\w
+\begin{center}
+
+
+
+
+\end{center}
+\begin{minipage}{0.6\textwidth}
+\begin{center}
+\large
+\emph{Professeurs:}\\
+Vincent \textsc{Lemaitre}\\
+Christophe \textsc{Delaere}\\
+\end{center}
+
+
+
+\end{minipage} 
+
+
+
+\end{center}
+
+
+
+\end{titlepage}
+\tableofcontents
+\newpage
+\renewcommand{\thesection}{\arabic{section}}
+\newcommand{\orto}{^{\circ}}
+\section{Introduction}
+
+
+
+\section{Simulation avec MadGraph5 et Delphes}
+
+\subsection{Génération d'événements avec MadGraph5 pour le Z}
+
+
+Pour le moment, nous sommes dans la partie "simulation" du laboratoire, c'est à dire que nous voulons générer des événements numériquement avec des méthodes Monte Carlo afin des les confronter dans un second temps aux données du CMS de 2010. Pour ce faire nous allons utiliser plusieurs logiciels, et le premier est MadGraph5 qui permet de générer des évènements choisis. Nous aimerions simuler la production du $Z$ à partir de collisions du type $p \ p$ (proton-proton), et pour cela il faut fournir à MadGraph5 les états asymptotiques de la collision. Nous allons nous concentrer sur les événements $[p \ p \ \rightarrow \ e- \ e+]$ et $[p \ p \ \rightarrow \ mu+ \ mu-]$, c'est à dire les événements où un $Z$ s'est désintégré en deux électrons ou deux muons. \\
+
+La première chose à faire est d'ouvrir MadGraph5 en utilisant la commande \textit{cd madgraph5}. Ensuite on rentre dans le programme en tappant \textit{./bin/mg5\_aMC}. Maintenant il faut générer le processus désiré, créer un dossier dans MadGraph et lancer la simulation. Voici les lignes de code pour simuler le processus $[p \ p \ \rightarrow \ e- \ e+]$ et créer un dossier nommé "ppee" : 
+\w
+\begin{flushleft}
+\textit{generate p p > e- e+} \\
+\textit{output ppee} \\
+\textit{launch ppee} \\
+\end{flushleft}
+
+Si on veut générer du muon, il suffit de remplacer $e$ par $mu$. Attention, avec ces commandes, tous les calculs et simulations de MadGraph se font au $LO$ (leading order). Si on veut être plus précis et faire du $NLO$ (next to leading order) il faut ajouter \textit{[QCD]} à la fin de la première commande, celle qui génère l'évènement. \\
+
+Si vous avez généré du $LO$, après avoir entré la commande "\textit{launch}", MadGraph affiche une série de lignes numérotés (qui sont des options de simulation) et la première est 
+\begin{center}
+1 Run the pythia shower/hadronization:         pythia=OFF
+\end{center}
+
+Pythia est le programme qui permet de générer des jets de particules due à la hadronization des quarks, il est donc important de l'activer afin d'avoir une simulation qui reproduit bien le nombre de jets. Pour ce faire il suffit d'entrer "1" dans la console. Maintenant MadGraphe affiche les mêmes lignes que précédemment mais la première se termine par "pythia = ON"; vous pouvez donc appuyer sur "enter"pour continuer.\\
+
+De nouveau une série de lignes numérotés s'affiche; ce sont d'autres options du run que vous vous apprêtez à lancer. Entrer "2" dans la console pour avoir accès à la run card de l'évènement. \\
+
+Vous pouvez modifier les paramètres comme vous voulez en fonction du nombre d'évènements que vous voulez, de certaines coupures éventuelles sur des paramètres (comme le moment transverse maximum, etc). Cependant, vous devrez toujours modifier l'énergie des faisceaux de protons. En effet, par défaut elles sont mises à 6500 $GeV$ chacune, ce qui fait 13 $TeV$ dans le centre de masse. Or en 2010 le LHC tournait avec 7 $TeV$ au centre de masse, il faut donc remplacer 6500 par 3500 pour les deux faisceaux. \\
+
+Cette run card qui s'affiche dans la console est ouverte avec l'éditeur de texte "vim" de linux, et ce n'est pas toujours très intuitif lorsqu'on n'y est pas habitué. Voici quelques règles de base : \\
+
+\begin{itemize}
+
+\item Pour pouvoir modifier des paramètres, il faut au préalable appuyer sur "\textit{a}", et pour revenir au mode initial pressez "\textit{esc}". \\
+\item Une fois les modifications terminées, pour quitter et sauvegarder il faut entrer "\textit{:wq}". 
+\end{itemize}
+\w
+
+Dans le cas où vous avez généré du $NLO$, vous n'avez pas besoin d'activer pythia après avoir appuyé sur "\textit{launch}", par contre il faut toujours modifier la run card. Elle est légèrement différente de celle pour le $LO$ mais fort similaire et fonctionne de la même manière. \\
+
+Tout est donc prêt, appuyez sur "enter" et le processus se met en route. Cela peut prendre un certain temps.
+
+\subsection{Génération d'événements avec MadGraph5 pour le W}
+
+Pour le boson $W$ il n'y a pas beaucoup de différence, si ce n'est que nous allons nous intéresser en même temps au $W^+$ et au $W^-$. Pour générer les deux, voici les lignes de codes à écrire : 
+
+\w
+\begin{flushleft}
+\textit{generate p p > l- ve \textasciitilde} \\
+\textit{add process p p > l+ ve} \\
+\end{flushleft}
+
+où $l$ désigne un lepton, et doit être remplacé par $e$ ou $mu$ selon le processus désiré. Pour le reste, tout est identique à la marche à suivre pour le $Z$.
+
+
+
+\subsection{Création de fichier ROOT avec Delphes}
+
+Dans le dossier MadGraph, ouvrez le dossier qui porte le nom que vous avez choisi pour votre processus. Ensuite allez dans le dossier "Events" et entrer dans le dossier "run\_x" où $x$ est le numéro du run que vous voulez analyser. Il y a un fichier avec l'extension ".hep.gz", c'est celui là qui nous intéresse pour la suite. Nous appellerons ce fichier "test.hep.gz" pour simplifier. Il faut copier ce fichier et le mettre dans le dossier "delphes". Faites de même avec le fichier "CreateTree.C" qui se trouve dans le dossier "PP1". Vous pouvez les mettre dans d'autres dossiers et les exécuter en fonction, mais toutes les lignes de code qui suivent marchent telles quelles uniquement si les fichier sont simplement mis dans le dossier "delphes".  \\
+
+La première chose à faire est de créer un ficher "test.hep". Pour ça ouvrez le dossier "delphes" dans le terminal et entrez "\textit{gunzip test.hep.gz}". Cela produit le fichier voulu. Maintenant nous allons faire tourner Delphes dessus. Avant toute chose, allez dans le dossier "PP1" et copiez le fichier "delphes\_card\_CMS\_mod.tcl" dans le dossier "cards" de delphes. Pour créer un fichier Root (par exemple output.root) à partir de notre fichier "test.hep" en utilisant la carte de delphes voulue, entrez la commande : \w
+
+\begin{flushleft}
+\textit{./DelphesSTDHEP cards/delphes\_card\_CMS\_mod.tcl output.root test.hep }
+\end{flushleft}  
+
+Le fichier output.root est un Tree qui contient énormément d'informations, mais pour rendre la simulation compatible avec les données nous devons créer un Tree plus petit avec uniquement les variables qui nous intéressent. Pour cela, il faut faire tourner la macro "CreateTree.C" dans root. Cette fonction prend trois arguments : le nom du fichier à traiter, le nom du fichier de sortie et un entier $x$. Si vous mettez $x=0$ cela veut dire que vous vous intéressez au $Z$, et si vous mettez $x=1$ c'est pour le $W$. Voici les lignes de commandes pour exécuter ce code et sortir un fichier "tree.root" à partir de "output.root":
+\w
+
+\begin{flushleft}
+\textit{root} \\
+\textit{.x CreateTree.C("output.root", "tree.root", 0)}
+\end{flushleft}
+
+Nous avons maintenant un arbre avec les même branches que celui contenant les données, ce qui facilitera grandement l'analyse en parallèle des deux.
+
+\section{Introduction à ROOT}
+
+Dans ce laboratoire vous allez beaucoup utiliser le logiciel ROOT. Il existe pas mal de documentation et de tutoriels sur internet. Cependant, voici tout de même quelques commandes et concepts de bases pour commencer. \\
+
+Pour ouvrir ROOT il suffit d'entrer la commande \textit{root} dans le terminal. Il faut bien veiller à se trouver dans le dossier qui contient les codes qu'on veut faire tourner. Par exemple, si on veut faire tourner un code qui se trouve dans le dossier "delphes", il faut ouvrir le répertoire delphes avec \textit{cd delphes}. \\
+
+Root est un programme qui permet, entre autre, de produire des histogrammes de différentes variables liées entre elles. Les objets que nous utiliserons le plus sont les arbres (Tree). Un arbre est constitué de plusieurs branches (et chaque branche peut contenir des feuilles). Par exemple dans notre problème, nous avons plusieurs variables d'intérêt, comme l'impulsion transverse et la masse invariante. Avec ROOT il est possible de mettre l'histogramme correspondant à chaque variable sur une branche d'un même arbre. Imaginons que nous ayons l'arbre "Tuto" avec les branches "PT" et "invMass". L'avantage de mettre cela dans un même arbre est que nous pouvons visualiser un histogramme en imposant des conditions sur une autre variable. Par exemple, si nous voulons voir la masse invariante en imposant que le PT soit plus grand que 30$GeV$ et que la masse soit inférieure à 100$GeV$ il suffit de taper : 
+\w
+
+\begin{flushleft}
+\textit{Tuto->Draw("invMass","invMass$<100$ \&\& PT$>30$" )}
+\end{flushleft} 
+
+Pour exécuter les opérations voulues, il y a plusieurs possibilités. Soit vous entrez directement les commandes dans la console, soit vous écrivez une macro.C que vous exécutez en entrant \textit{.x macro.C} dans ROOT. Au niveau de la macro, il peut soit s'agir d'un script contenant une série d'instruction, soit d'un programme qui a la structure habituelle d'un programme C++. Peu importe l'option choisie, la programmation se fait toujours en C++. \\
+
+Lorsque vous êtes dans ROOT, si vous voulez ouvrir le browser pour avoir accès aux différents fichiers, entrez simplement : \textit{TBrowser t;} \\
+
+Dans le dossier "tuto\_root" dans "PP1" se trouvent des codes commentés montrant quelques opérations simples, comme lire un fichier, créer un histogramme, etc. \\
+
+
+
+%\section{CMSSW}
+
+\section{Application au Z et au W}
+
+\subsection{Arbre}
+Voici les branches de l'arbre que vous aller analyser. L'arbre des donn\'{e}es se nomme \textit{data.root} et se trouve dans le dossier "PP1". La simulation cr\'{e}era un arbre semblable grâce au programme "CreateTree.C". \\
+
+\begin{itemize}
+ \item nMuons : nombre de muons
+ \item MuonsPt : impulsion transverse des muons
+ \item MuonsEta : pseudo-rapidit\'{e} des muons
+ \item MuonsPhi : angle azimuthal des muons
+ \item muonIsolation : rapport entre la calo-isolation et le pt des muons
+ \item nElectrons : nombre d' \'{e}lectrons
+ \item ElectronsPt : impulsion transverse des \'{e}lectrons
+ \item ElectronsEta : pseudo-rapidit\'{e} des \'{e}lectrons
+ \item ElectronsPhi : angle azimuthal des \'{e}lectrons
+ \item electronIsolation : rapport entre la calo-isolation et le pt des \'{e}lectrons
+ \item nJets : nombre de jets
+ \item JetsPt : impulsion transverse des jets
+ \item JetsEta : pseudo-rapidit\'{e} des jets
+ \item JetsPhi : angle azimuthal des jets
+ \item invMass : masse invariante des 2 e ou 2 mu de plus grand pt (si l'\'{e}v\'{e}nement \`{a} \'{e}t\'{e} selectionn\'{e}, c'est à dire si il y avait au moins deux e ou deux mu)
+ \item deltaR\_Muons : racine carr\'{e}e de la somme des carr\'{e}s des diff\'{e}rences en $\eta$ et $\phi$ des 2 mu de plus grand pt (si l'\'{e}v\'{e}nement \`{a} \'{e}t\'{e} selectionn\'{e})
+ \item deltaR\_Electrons : racine carree de la somme des carrés des differences en $\eta$ et $\phi$ des 2 e de plus grand pt (si l'\'{e}v\'{e}nement \`{a} \'{e}t\'{e} selectionn\'{e})
+ \item MET\_pt : impulsion transverse manquante
+ \item MET\_phi : angle azimuthal de l'impulsion transverse manquante
+ \item MET\_eta : pseudo-rapidit\'{e} de l'impulsion transverse manquante
+\end{itemize}
+\w
+
+Attention! Pour le $Z$, la masse invariante de la branche "invMass" est correcte. Par contre, pour le $W$ il va falloir calculer la masse transverse dans l'analyse des données, donc la branche "invMass" est sans importance dans ce cas. 
+
+\subsection{Fonctions utiles}
+Vous trouverez ici une liste non exhaustive des classes et m\'{e}thodes qui vous seront utiles (pour la documentation compl\`{e}te, rendez-vous sur https://root.cern.ch/). \\
+
+\paragraph{TFile}
+Variable contenant un fichier.
+ \begin{itemize}
+  \item Open(\textcolor{red}{string} \textit{nom du fichier}) : ouvre le fichier sp\'{e}cifi\'{e}.
+ \end{itemize} 
+
+ \paragraph{TTree}
+ Variable contenant un arbre.
+  \begin{itemize}
+   \item SetBranchAddress(\textcolor{red}{string} \textit{nom de la branche}, \textcolor{red}{type} \&\textit{value}) : met l'adresse de la branche sp\'{e}cifi\'{e}e de l'arbre \`{a} l'adresse de \textit{value} (le type de \textit{value} doit correspondre au type des donn\'{e}es de la branche). 
+  \end{itemize}
+
+\paragraph{TH1F}
+Variable contenant un histogramme uni-dimensionnelle de float.
+  \begin{itemize}
+  \item TH1F(\textcolor{red}{string} \textit{nom de l'histogramme}, \textcolor{red}{string} \textit{titre de l'histogramme}, \textcolor{red}{int} \textit{nombre de bins}, \textcolor{red}{float} \textit{valeur minimale}, \textcolor{red}{float} \textit{valeur maximale}) : constructeur.
+  \item SumW2() : ajoute une erreur sur le nombre dans chaque bin, qui est la racine carr\'{e}e de ce nombre.
+  \item Fill(\textcolor{red}{float} \textit{value}) : remplit l'histogramme avec la valeur \textit{value}.
+  \item Scale(\textcolor{red}{float} \textit{\'{e}chelle}) : multiplie toutes les entr\'{e}es de l'histogramme par l'\'{e}chelle.
+  \item SetLineColor(\textit{couleur}) : change la couleur de la ligne de tracer du haut des bins (les couleurs sont \textit{kRed}, \textit{kBlue}, \textit{kYellow}, ...).
+  \item SetFillColor(\textit{couleur}) : change la couleur de remplisage de l'histogramme (voir options de Draw).
+  \item SetMaximum(\textcolor{red}{float} \textit{max}) : ajuste la hauteur de l'axe vertical du graphe \`{a} la valeur \textit{max}.
+  \item Draw(\textcolor{red}{string} \textit{options}) : trace l'histogramme, avec les options \'{e}ventuelles \textit{same} (trace l'histogramme sur le m\^{e}me graphe que le pr\'{e}c\'{e}dent), et \textit{hist} (fait un histogramme plein).
+  \item Fit(\textcolor{red}{string} \textit{nom de la fonction}, \textcolor{red}{string} \textit{options}) : fitte l'histogramme avec la fonction pr\'{e}cis\'{e}e (voir TF1) avec les options \'{e}ventuelles \textit{R} (utilise le m\^{e}me range pour le fit que le range de la fonction), \textit{L} (fit en likelihood plut\^{o}t qu'en chi carr\'{e}).
+  \end{itemize}
+
+\paragraph{TF1}
+Variable contenant une fonction uni-dimensionnelle.
+  \begin{itemize}
+   \item TF1(\textcolor{red}{string} \textit{nom de la fonction}, \textit{formule}, \textcolor{red}{float} \textit{valeur minimale}, \textcolor{red}{float} \textit{valeur maximale}, \textcolor{red}{int} \textit{nombre de param\`{e}tres}) : constructeur. Si la formule est expilicite, e.g. [0]*TMath::Cos([1]*x), il n'est pas n\'{e}cessaire de pr\'{e}ciser le nombre de param\`{e}tres, sinon, soit on utilise une fonction pr\'{e}d\'{e}finie de Root, e.g. \textit{gaus}, soit une fonction d\'{e}finie par l'utilisateur dans un fichier \textit{fonction.C} (ne pas oublier alors la ligne gROOT->LoadMacro("fonction.C"); !!!), auquel cas il faut pr\'{e}ciser le nombres de param\`{e}tres.
+   \item SetParameter(\textcolor{red}{int} \textit{num\'{e}ro du param\`{e}tre}, \textcolor{red}{float} \textit{value}) : modifie la valeur d'un param\'{e}tre.
+    \item GetParameter(\textcolor{red}{int} \textit{num\'{e}ro du param\`{e}tre}, \textcolor{red}{float} \textit{value}) : acc\`{e}de \`{a} la valeur d'un param\'{e}tre.
+  \end{itemize}
+
+
+\paragraph{TLegend}
+Variable contenant la l\'{e}gende d'un histogramme.
+  \begin{itemize}
+   \item TLegend( \textcolor{red}{float} \textit{x minimal},  \textcolor{red}{float} \textit{y minimal},  \textcolor{red}{float} \textit{x maximal},  \textcolor{red}{float} \textit{y maximal}) : constructeur. Sp\'{e}cifie la position du cadre de la l\'{e}gende.
+   \item AddEntry((\textcolor{red}{TH1F} \textit{nom de l'histogramme}, \textcolor{red}{string} \textit{nom affich\'{e} dans la l\'{e}gende}, \textcolor{red}{string} \textit{options}) : ajoute une entr\'{e}e, avec comme option \textit{l} pour les histogrammes en lignes et \textit{f} pour ceux pleins.
+   \item Draw(\textcolor{red}{string} \textit{options}) : voir TH1F.
+  \end{itemize}
+
+
+\paragraph{THStack}
+Variable superposant plusieurs histogrammes.
+  \begin{itemize}
+   \item THStack((\textcolor{red}{string} \textit{nom du stack},"") : constructeur (les "" vides semblent n\'{e}cessaires).
+   \item Add(\textcolor{red}{TH1F} \textit{nom de l'histogramme}) : superpose l'histogramme \`{a} ceux d\'{e}j\`{a} pr\'{e}sents (le dernier stack\'{e} est au dessus).
+   \item m\^{e}me fonctions que TH1F.
+  \end{itemize}
+
+
+
+
+
+\end{document}

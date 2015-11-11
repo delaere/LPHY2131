@@ -1,0 +1,11 @@
+<use name="FWCore/Framework"/>
+<use name="FWCore/PluginManager"/>
+<use name="FWCore/ParameterSet"/>
+<use name="DataFormats/PatCandidates"/>
+<use name="DataFormats/Candidate"/>
+<use name="DataFormats/METReco"/>
+<flags EDM_PLUGIN="1"/>
+<use name="CommonTools/UtilAlgos"/>
+<export>
+   <lib name="1"/>
+</export>
