@@ -28,6 +28,7 @@ wget --no-check-certificate -qO- https://launchpad.net/mg5amcnlo/2.0/2.3.0/+down
 xmessage -buttons Ok:0 -nearmouse "Installing Delphes 3.3.0" -timeout 5 &
 wget -qO- http://cp3.irmp.ucl.ac.be/downloads/Delphes-3.3.0.tar.gz | tar zxv 
 cd Delphes-3.3.0
+maje -j 4
 make -j 4 display
 cd
 xmessage -buttons Ok:0 -nearmouse "DONE" -timeout 5 &
