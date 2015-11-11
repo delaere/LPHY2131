@@ -3,8 +3,9 @@
 #Download the virtual machine from http://opendata.cern.ch/VM/CMS#how
 #Increase the RAM to 2GB
 #Enable 3D acceleration
+#after booting, change the keyboard layout (if needed)
 #git clone https://github.com/delaere/LPHY2131.git
-#LPHY2131/install.sh
+#. LPHY2131/install.sh
 
 xmessage -buttons Ok:0 -nearmouse "Downloading sample CMS data file" -timeout 5 &
 mkdir data
@@ -12,7 +13,7 @@ wget https://cernbox.cern.ch/index.php/s/VHkv9wHTK4r9whl/download -O data/Electr
 xmessage -buttons Ok:0 -nearmouse "Installing CMSSW 4.2.8 (used for 2010 data processing)" -timeout 5 &
 cmsrel CMSSW_4_2_8
 cd CMSSW_4_2_8/src
-cp ~/LPHY2131/CMSSW LPHY2131
+cp -r ~/LPHY2131/CMSSW LPHY2131
 cmsenv
 scram b
 cd ../..
