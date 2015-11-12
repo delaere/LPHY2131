@@ -7,10 +7,10 @@
 #git clone https://github.com/delaere/LPHY2131.git
 #. LPHY2131/install.sh
 
-xmessage -buttons Ok:0 -nearmouse "Downloading sample CMS data file" -timeout 5 &
+xmessage -buttons Ok:0 -nearmouse "Downloading sample CMS data files" -timeout 5 &
 mkdir data
+wget https://cernbox.cern.ch/index.php/s/ls2FyCbFx0UVjiO/download -O data/El2010data_sample.root
 wget https://cernbox.cern.ch/index.php/s/nFgkXD5e1W9KEJX/download -O data/Mu2010data_sample.root
-wget https://cernbox.cern.ch/index.php/s/VHkv9wHTK4r9whl/download -O data/Electron2010data_500files_1.root
 xmessage -buttons Ok:0 -nearmouse "Installing CMSSW 4.2.8 (used for 2010 data processing)" -timeout 5 &
 cmsrel CMSSW_4_2_8
 cd CMSSW_4_2_8/src
