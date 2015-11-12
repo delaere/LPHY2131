@@ -31,7 +31,7 @@ echo "install pythia-pgs" | bin/mg5_aMC
 xmessage -buttons Ok:0 -nearmouse "Installing Delphes 3.3.0" -timeout 5 &
 wget -qO- http://cp3.irmp.ucl.ac.be/downloads/Delphes-3.3.0.tar.gz | tar zxv 
 cd Delphes-3.3.0
-maje -j 4
+make -j 4
 make -j 4 display
 cd
 xmessage -buttons Ok:0 -nearmouse "DONE" -timeout 5 &
