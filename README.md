@@ -4,7 +4,7 @@ Material for the LPHY2131 lab
 To install, follow the instructions below:
 
 1. Download the virtual machine from http://opendata.cern.ch/VM/CMS#how
-  - Increase the RAM to 2GB
+  - Increase the RAM to 2GB (optional. The minimum is 1GB)
   - Enable 3D acceleration
   - after booting, change the keyboard layout (if needed)
 2. git clone https://github.com/delaere/LPHY2131.git
