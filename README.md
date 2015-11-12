@@ -7,8 +7,9 @@ To install, follow the instructions below:
   - Increase the RAM to 2GB (optional. The minimum is 1GB)
   - Enable 3D acceleration
   - after booting, change the keyboard layout (if needed)
-2. git clone https://github.com/delaere/LPHY2131.git
-3. . LPHY2131/install.sh # mind the dot!
+2. In a terminal (black icon at the bottom left of the screen), run the following two commands. Note that the second command starts with a dot followed by a space.
+  - git clone https://github.com/delaere/LPHY2131.git
+  - . LPHY2131/install.sh
 
 This prepares the environment for the lab: 
 - install CMSSW 4.2.8 (used for 2010 data processing)
