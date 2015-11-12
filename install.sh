@@ -28,6 +28,7 @@ xmessage -buttons Ok:0 -nearmouse "Installing MadGraph 5" -timeout 5 &
 wget --no-check-certificate -qO- https://launchpad.net/mg5amcnlo/2.0/2.3.0/+download/MG5_aMC_v2.3.3.tar.gz | tar zxv
 cd MG5_aMC_v2_3_3/
 echo "install pythia-pgs" | bin/mg5_aMC
+cd ..
 xmessage -buttons Ok:0 -nearmouse "Installing Delphes 3.3.0" -timeout 5 &
 wget -qO- http://cp3.irmp.ucl.ac.be/downloads/Delphes-3.3.0.tar.gz | tar zxv 
 cd Delphes-3.3.0
