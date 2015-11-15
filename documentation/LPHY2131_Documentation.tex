@@ -7,6 +7,17 @@
 \usepackage{hyperref} 
 \hypersetup{pdfauthor={C. Delaere},pdftitle={LPHY2131 CMS OpenData lab},pdfkeywords={LPHY2131, weak bosons, CMS, LHC, opendata, data analysis},pdfsubject={Particle Physics}}
 \usepackage{lmodern}
+\usepackage{adjustbox}
+\usepackage{fancyvrb}
+\newenvironment{myverb}{%
+ \VerbatimEnvironment
+ \begin{adjustbox}{max width=\linewidth, margin=2ex}
+ \begin{BVerbatim}
+  }{
+  \end{BVerbatim}
+ \end{adjustbox}
+
+}
 
 \begin{document}
 \def\w{\par \vspace{\baselineskip}}
