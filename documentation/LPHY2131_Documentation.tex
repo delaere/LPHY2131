@@ -1,0 +1,62 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage{float}
+\usepackage{longtable, booktabs}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[final]{pdfpages} 
+\usepackage{hyperref} 
+\hypersetup{pdfauthor={C. Delaere},pdftitle={LPHY2131 CMS OpenData lab},pdfkeywords={LPHY2131, weak bosons, CMS, LHC, opendata, data analysis},pdfsubject={Particle Physics}}
+\usepackage{lmodern}
+
+\begin{document}
+\def\w{\par \vspace{\baselineskip}}
+\begin{titlepage}
+\begin{center}
+\textsc{\Large Université Catholique de Louvain }\\[0.5cm]
+\w
+\w
+\textsc{\huge LPHY2131 : Particle Physics I }\\[0.34cm]
+\textsc{\large CMS OpenData lab: measuring Z and W bosons}\\[0.7cm]
+\w
+\begin{minipage}{0.6\textwidth}
+\begin{center}
+\large
+Vincent \textsc{Lemaitre}\\
+Christophe \textsc{Delaere}\\
+\end{center}
+\end{minipage} 
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+\input{Home.tex}
+\newpage
+
+\section{Day 1 - Understanding the data and simulation workflows}
+\input{Day-1---Understanding-the-data-and-simulation-workflows.tex}
+\newpage
+
+\section{Day 2 - Measuring the Z boson and determining the luminosity}
+\input{Day-2---Measuring-the-Z-boson-and-determining-the-luminosity.tex}
+\newpage
+
+\section{Day 3 - Measuring the W boson and determining its cross section}
+\input{Day-3---Measuring-the-W-boson-and-determining-its-cross-section.tex}
+\newpage
+
+\section{ROOT Primer}
+\input{ROOT-Primer.tex}
+\newpage
+
+\section{Vim Primer}
+\input{Vim-Primer.tex}
+\newpage
+
+\section{The analysis tree}
+\input{The-analysis-tree.tex}
+\newpage
+
+\end{document}
