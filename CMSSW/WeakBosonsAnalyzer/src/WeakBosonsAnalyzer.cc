@@ -123,6 +123,7 @@ void WeakBosonsAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup
    }
    // count the selected muons
    nMuons = selectedMuons.size();
+   nMuons = nMuons<20 ? nMuons : 20;
    // sort the collection by Pt
    std::sort(selectedMuons.begin(),selectedMuons.end(),sortMuonsByPt);
    // loop on the selected muons and extract Pt, eta, phi, isolation
@@ -152,6 +153,7 @@ void WeakBosonsAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup
    }
    // count the selected electrons
    nElectrons = selectedElectrons.size();
+   nElectrons = nElectrons<20 ? nElectrons : 20;
    // sort the collection by Pt
    std::sort(selectedElectrons.begin(),selectedElectrons.end(),sortElectronsByPt);
    // loop on the selected muons and extract Pt, eta, phi, isolation
