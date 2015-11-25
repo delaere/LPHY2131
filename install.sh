@@ -9,8 +9,10 @@
 
 xmessage -buttons Ok:0 -nearmouse "Downloading sample CMS data files" -timeout 5 &
 mkdir data
-wget https://cernbox.cern.ch/index.php/s/ls2FyCbFx0UVjiO/download -O data/El2010data_sample.root
-wget https://cernbox.cern.ch/index.php/s/nFgkXD5e1W9KEJX/download -O data/Mu2010data_sample.root
+wget --no-check-certificate https://cernbox.cern.ch/index.php/s/ls2FyCbFx0UVjiO/download -O data/El2010data_sample.root
+wget --no-check-certificate https://cernbox.cern.ch/index.php/s/nFgkXD5e1W9KEJX/download -O data/Mu2010data_sample.root
+wget --no-check-certificate https://cernbox.cern.ch/index.php/s/Lo3uCkw19Amxq3A/download -O data/Electron2010data_flat.root
+wget --no-check-certificate https://cernbox.cern.ch/index.php/s/B6jeGkIxGNQajF8/download -O data/Mu2010data_flat.root
 xmessage -buttons Ok:0 -nearmouse "Installing CMSSW 4.2.8 (used for 2010 data processing)" -timeout 5 &
 cmsrel CMSSW_4_2_8
 cd CMSSW_4_2_8/src

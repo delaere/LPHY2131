@@ -2,13 +2,13 @@
 // it is useful once the cuts have been decided in order to determine the scale factor for MC (and therefore the luminosity or the cross-section)
 
 {
-// constants
+// constants to be adapted
 TString var = "invMass";
 Int_t bins = 30;
 Float_t low = 50;
 Float_t high = 140;
 TString cuts = "nElectrons==2";
-TFile* data_file = TFile::Open("LPHY2131tree.root");
+TFile* data_file = TFile::Open("Electron2010data_flat.root");
 TFile* simu_file = TFile::Open("delpheAnalysisZ.root");
 
 // some initialization
@@ -58,11 +58,18 @@ hdata->Draw(); // draw data
 fit->GetPlot()->Draw("same"); // draw fit outcome: signal+background
 Double_t value,error;
 fit->GetResult(0,value,error);
+std::cout << "Purity: " << value << " +/- " << error << std::endl;
 std::cout << "Scale Factor: " << hdata->Integral()*value/hsimu->Integral() << std::endl;
+std::cout << "N_mc = " << hsimu->Integral() << std::endl;
+std::cout << "N_data = " << hdata->Integral() << std::endl;
+std::cout << "N_signal = " << hdata->Integral()*value << std::endl;
+std::cout << "N_bkg = " << hdata->Integral()*(1-value) << std::endl;
 hsimu->Scale(hdata->Integral()*value/hsimu->Integral());
 hsimu->Draw("same histo"); // draw the scaled signal alone
+hdata->Draw("same"); // redraw data on top
 
 // conclude
 gPad->Update();
+
 }
 

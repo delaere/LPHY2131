@@ -5,17 +5,16 @@
 {
 // constants
 TString var = "transvMass";
-Int_t bins = 20;
-Float_t low = 40;
-Float_t high = 100;
+Int_t bins = 25;
+Float_t low = 20;
+Float_t high = 120;
 TString cuts_signalregion  = "nElectrons>=1";
 TString cuts_controlregion = "nElectrons>=1";
-TFile* data_file = TFile::Open("LPHY2131tree.root");
+TFile* data_file = TFile::Open("Electron2010data_flat.root");
 TFile* simu_file = TFile::Open("delpheAnalysisW.root");
 Float_t scale_factor = 1.;
 
 // some initialization
-gROOT->LoadMacro("functions.C");
 gStyle->SetOptFit(111111);
 
 // create the histograms to fill
@@ -27,7 +26,7 @@ TH1F* hbkg = new TH1F(Form("%s_bkg",(const char*)var),var,bins,low,high);
 hbkg->Sumw2();
 
 // fill and draw the histograms
-new TCanvas;
+TCanvas* c1 = new TCanvas;
 data_file->cd("LPHY2131analysis");
 hdata->SetDirectory(gDirectory);
 WeakBosonsAnalysis->Draw(Form("%s>>%s_data",(const char*)var,(const char*)var),cuts_signalregion,"E0 P0");
@@ -40,10 +39,11 @@ hsimu->SetDirectory(gDirectory);
 WeakBosonsAnalysis->Draw(Form("%s>>%s_simu",(const char*)var,(const char*)var),cuts_signalregion,"HIST SAME");
 hsimu->Scale(scale_factor);
 hsimu->SetFillColor(kYellow);
+hsimu->SetFillStyle(3008);
 hdata->Draw("same");
 
 // do the fit
-new TCanvas;
+TCanvas* c2 = new TCanvas;
 TObjArray *contributions = new TObjArray(2);
 contributions->Add(hbkg);
 contributions->Add(hsimu);
@@ -53,9 +53,10 @@ fit->Constrain(1,0.0,1.0);
 fit->Fit();
 hdata->Draw();
 fit->GetPlot()->Draw("same");
+delete c2;
 
 // combined plot
-new TCanvas;
+TCanvas* c3 = new TCanvas;
 Double_t value,error;
 fit->GetResult(0,value,error);
 float bkg_sf = hdata->Integral()*value/hbkg->Integral();
@@ -81,6 +82,7 @@ leg->Draw("same");
 
 // some final printout
 
+std::cout << "signal purity: " << value << "+/-" << error << std::endl;
 std::cout << "estimated number of signal events: " << hdata->Integral()*value << std::endl;
 std::cout << "corresponding scale factor: " << hdata->Integral()*value/hsimu->GetEntries() << std::endl;
 

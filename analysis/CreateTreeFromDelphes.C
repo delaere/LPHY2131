@@ -163,7 +163,7 @@ void CreateTreeFromDelphes(TString input, TString output_tree)
    
       // missing transverse energy
       MissingET *met = (MissingET*)branchMissingET->At(0);
-      MET_pt = met->MET + gRandom->Gaus(-3.0,4.5); // artificial smearing to fit data
+      MET_pt = met->MET + gRandom->Gaus(0,6); // artificial smearing to fit data
       MET_phi= met->Phi;
       MET_eta= met->Eta;
 

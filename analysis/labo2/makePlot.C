@@ -3,13 +3,13 @@
 {
 // constants
 TString var = "invMass";
-Int_t bins = 100;
-Float_t low = 0;
-Float_t high = 100;
+Int_t bins = 90;
+Float_t low = 40;
+Float_t high = 150;
 Float_t scale_factor = 0.1;
-TString cuts = "nElectrons==2 && ElectronsPt[0]>20 && (Long64_t)33 electronIsolation[0]* electronIsolation[1]<0.001";
-TFile* data_file = TFile::Open("data.root");
-TFile* simu_file = TFile::Open("simu.root");
+TString cuts = "nMuons==0 && nElectrons==2 && nJets==0";
+TFile* data_file = TFile::Open("Electron2010data_flat.root");
+TFile* simu_file = TFile::Open("delpheAnalysisZ.root");
 
 // some initialization
 gROOT->LoadMacro("functions.C");
@@ -34,8 +34,8 @@ hsimu->Scale(scale_factor);
 hsimu->SetFillColor(kYellow);
 
 // fit the data (only makes sense for the Z mass plot)
-TF1 *func = new TF1("myVoigt", myVoigt ,low, high,4);
-func->SetParameter(0,10.0);   func->SetParName(0,"const");
+TF1 *func = new TF1("myVoigt", myVoigt ,80, 100,4);
+func->SetParameter(0,1500.0);   func->SetParName(0,"const");
 func->SetParameter(1,90.0);   func->SetParName(1,"mean");
 func->SetParameter(2,3.0);    func->SetParName(2,"sigma");
 func->SetParameter(3,3.0);    func->SetParName(3,"gamma");
