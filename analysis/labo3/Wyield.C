@@ -53,7 +53,7 @@ fit->Constrain(1,0.0,1.0);
 fit->Fit();
 hdata->Draw();
 fit->GetPlot()->Draw("same");
-delete c2;
+//delete c2;
 
 // combined plot
 TCanvas* c3 = new TCanvas;
@@ -83,7 +83,10 @@ leg->Draw("same");
 // some final printout
 
 std::cout << "signal purity: " << value << "+/-" << error << std::endl;
-std::cout << "estimated number of signal events: " << hdata->Integral()*value << std::endl;
+std::cout << "N_mc = " << hsimu->GetEntries() << std::endl;
+std::cout << "N_data = " << hdata->Integral() << std::endl;
+std::cout << "N_W = " << hdata->Integral()*value << std::endl;
+std::cout << "N_bkg = " << hdata->Integral()*(1-value) << std::endl;
 std::cout << "corresponding scale factor: " << hdata->Integral()*value/hsimu->GetEntries() << std::endl;
 
 // conclude

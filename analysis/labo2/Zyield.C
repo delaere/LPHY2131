@@ -8,8 +8,13 @@ Int_t bins = 30;
 Float_t low = 50;
 Float_t high = 140;
 TString cuts = "nElectrons==2";
+// files
 TFile* data_file = TFile::Open("Electron2010data_flat.root");
 TFile* simu_file = TFile::Open("delpheAnalysisZ.root");
+// analytical form for the background
+TF1* f0 = new TF1("bkg","[0]+[1]*x",50,140); //to be adapted
+f0->SetParameter(1,-0.02); //to be adapted
+f0->SetParameter(0,3.); //to be adapted
 
 // some initialization
 gROOT->LoadMacro("functions.C");
@@ -37,9 +42,6 @@ simu_file->cd();
 hsimu->SetDirectory(gDirectory);
 WeakBosonsAnalysis->Draw(Form("%s>>%s_simu",(const char*)var,(const char*)var),cuts,"HIST SAME");
 hsimu->SetFillColor(kYellow);
-TF1* f0 = new TF1("bkg","[0]+[1]*x",50,140); //to be adapted
-f0->SetParameter(1,-0.02); //to be adapted
-f0->SetParameter(0,3.); //to be adapted
 for( Int_t i=0; i<10000; i++) {
   hbackground->Fill( f0->GetRandom() );
 }
@@ -62,7 +64,7 @@ std::cout << "Purity: " << value << " +/- " << error << std::endl;
 std::cout << "Scale Factor: " << hdata->Integral()*value/hsimu->Integral() << std::endl;
 std::cout << "N_mc = " << hsimu->Integral() << std::endl;
 std::cout << "N_data = " << hdata->Integral() << std::endl;
-std::cout << "N_signal = " << hdata->Integral()*value << std::endl;
+std::cout << "N_Z = " << hdata->Integral()*value << std::endl;
 std::cout << "N_bkg = " << hdata->Integral()*(1-value) << std::endl;
 hsimu->Scale(hdata->Integral()*value/hsimu->Integral());
 hsimu->Draw("same histo"); // draw the scaled signal alone
