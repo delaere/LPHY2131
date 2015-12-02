@@ -9,7 +9,7 @@ Float_t low = 50;
 Float_t high = 140;
 TString cuts = "nElectrons==2";
 // files
-TFile* data_file = TFile::Open("Electron2010data_flat.root");
+TFile* data_file = TFile::Open("El2010data_flat.root");
 TFile* simu_file = TFile::Open("delpheAnalysisZ.root");
 // analytical form for the background
 TF1* f0 = new TF1("bkg","[0]+[1]*x",50,140); //to be adapted
