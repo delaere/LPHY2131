@@ -15,7 +15,7 @@ wget --no-check-certificate https://cernbox.cern.ch/index.php/s/EbdLlLz901txPqW/
 wget --no-check-certificate https://cernbox.cern.ch/index.php/s/QrDW19joGTkVHEc/download -O data/Mu2010data_flat.root
 xmessage -buttons Ok:0 -nearmouse "Installing CMSSW 4.2.8 (used for 2010 data processing)" -timeout 5 &
 cmsrel CMSSW_4_2_8
-cd CMSSW_4_2_8/src
+cd CMSSW_5_3_32/src
 cp -r ~/LPHY2131/CMSSW LPHY2131
 cmsenv
 scram b
