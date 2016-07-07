@@ -1,4 +1,4 @@
-#!/bin/env sh
+i#!/bin/env sh
 
 #Download the virtual machine from http://opendata.cern.ch/VM/CMS#how
 #Increase the RAM to 2GB
@@ -8,13 +8,11 @@
 #. LPHY2131/install.sh
 
 xmessage -buttons Ok:0 -nearmouse "Downloading sample CMS data files" -timeout 5 &
-mkdir data
-wget --no-check-certificate https://cernbox.cern.ch/index.php/s/ls2FyCbFx0UVjiO/download -O data/El2010data_sample.root
-wget --no-check-certificate https://cernbox.cern.ch/index.php/s/nFgkXD5e1W9KEJX/download -O data/Mu2010data_sample.root
-wget --no-check-certificate https://cernbox.cern.ch/index.php/s/EbdLlLz901txPqW/download -O data/El2010data_flat.root
-wget --no-check-certificate https://cernbox.cern.ch/index.php/s/QrDW19joGTkVHEc/download -O data/Mu2010data_flat.root
+
+# to do : cp -r /nfs/user/jdf/Electron_PAT_test_1.root
+
 xmessage -buttons Ok:0 -nearmouse "Installing CMSSW 4.2.8 (used for 2010 data processing)" -timeout 5 &
-cmsrel CMSSW_4_2_8
+cmsrel CMSSW_5_3_32
 cd CMSSW_5_3_32/src
 cp -r ~/LPHY2131/CMSSW LPHY2131
 cmsenv
