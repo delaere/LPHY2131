@@ -15,7 +15,8 @@ process.options = cms.untracked.PSet( SkipEvent = cms.untracked.vstring('Product
 # for files at CERN on eos, use "root://eospublic.cern.ch/" followed by the eos path.
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
-        'file:///home/cms-opendata/data/Electron2010data_500files_1.root',
+        'file:///nfs/user/jdf/Electron_PAT_test_1.root'
+        #'file:///home/cms-opendata/data/Electron2010data_500files_1.root',
         #'file:///media/sf_data_2/Electron2010data2_500files_2.root',
         #'file:///media/sf_data_2/Electron2010data2_500files_3.root',
         #'file:///media/sf_data_2/Electron2010data2_500files_4.root',
