@@ -14,7 +14,7 @@ xmessage -buttons Ok:0 -nearmouse "Downloading sample CMS data files" -timeout 5
 xmessage -buttons Ok:0 -nearmouse "Installing CMSSW 4.2.8 (used for 2010 data processing)" -timeout 5 &
 cmsrel CMSSW_5_3_32
 cd CMSSW_5_3_32/src
-cp -r ~/LPHY2131-1/CMSSW LPHY2131-1
+cp -r ~/LPHY2131-1/CMSSW Labo
 cmsenv
 scram b
 cd ../..
