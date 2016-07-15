@@ -9,7 +9,8 @@ Float_t low = 50;
 Float_t high = 140;
 TString cuts = "nElectrons==2";
 // files
-TFile* data_file = TFile::Open("El2010data_flat.root");
+// do not forget to change the Ntuplefiles with the list of Ntuples files of either electrons or muons
+TFile* data_file = TFile::Open("Ntuplefiles");
 TFile* simu_file = TFile::Open("delpheAnalysisZ.root");
 // analytical form for the background
 TF1* f0 = new TF1("bkg","[0]+[1]*x",50,140); //to be adapted
