@@ -11,7 +11,7 @@ xmessage -buttons Ok:0 -nearmouse "Downloading sample CMS data files" -timeout 5
 
 #cp -r /nfs/user/jdf/Electron_PAT_test_1.root  /home/fynu/vmassart/LPHY2131-1/data
 
-xmessage -buttons Ok:0 -nearmouse "Installing CMSSW 4.2.8 (used for 2010 data processing)" -timeout 5 &
+xmessage -buttons Ok:0 -nearmouse "Installing CMSSW 5.3.32 (used for 2010 data processing)" -timeout 5 &
 cmsrel CMSSW_5_3_32
 cd CMSSW_5_3_32/src
 cp -r ~/LPHY2131-1/CMSSW Labo
