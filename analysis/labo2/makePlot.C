@@ -10,8 +10,8 @@ Float_t high = 150;
 Float_t scale_factor = 0.1;
 // the changes in cuts must be done here
 TString cuts = "nMuons==0 && nElectrons==2 && nJets==0";
-// 
-TFile* data_file = TFile::Open("Ntuplesfiles");
+// change "Ntuplefiles" with the name of Ntuples files of either electrons or muons
+TFile* data_file = TFile::Open("Ntuplefiles");
 TFile* simu_file = TFile::Open("delpheAnalysisZ.root");
 
 // some initialization
