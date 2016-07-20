@@ -2,6 +2,8 @@ import FWCore.ParameterSet.Config as cms
 
 process = cms.Process("ZDecay")
 process.load("FWCore.MessageService.MessageLogger_cfi")
+#show the message of run every 1000 events to improve the speed of the analyze
+process.MessageLogger.cerr.FwkReport.reportEvery = 1000
 
 # maximum number of events to be processed
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
