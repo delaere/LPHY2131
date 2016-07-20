@@ -1,14 +1,13 @@
 #i#!/bin/env sh
 
 #Download the virtual machine from http://opendata.cern.ch/VM/CMS#how
-#Increase the RAM to 2GB
-#Enable 3D acceleration
 #after booting, change the keyboard layout (if needed)
 #git clone https://github.com/delaere/LPHY2131.git
 #. LPHY2131/install.sh
 
 xmessage -buttons Ok:0 -nearmouse "Downloading sample CMS data files" -timeout 5 &
 
+#copy the sample of pat files in the virtual machine
 #cp -r /nfs/user/jdf/Electron_PAT_test_1.root  /home/fynu/vmassart/LPHY2131-1/data
 
 xmessage -buttons Ok:0 -nearmouse "Installing CMSSW 5.3.32 (used for 2011 data processing)" -timeout 5 &
