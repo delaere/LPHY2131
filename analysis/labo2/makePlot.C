@@ -8,9 +8,10 @@ Float_t low = 40;
 Float_t high = 150;
 // change the scale factor given by Zyield here
 Float_t scale_factor = 0.1;
-// 
+// the changes in cuts must be done here
 TString cuts = "nMuons==0 && nElectrons==2 && nJets==0";
-TFile* data_file = TFile::Open("Electron2010data_flat.root");
+// 
+TFile* data_file = TFile::Open("Ntuplesfiles");
 TFile* simu_file = TFile::Open("delpheAnalysisZ.root");
 
 // some initialization
