@@ -8,7 +8,7 @@
 xmessage -buttons Ok:0 -nearmouse "Installing CMSSW 5.3.32 (used for 2011 data processing)" -timeout 5 &
 cmsrel CMSSW_5_3_32
 cd CMSSW_5_3_32/src
-cp -r ~/LPHY2131-1/CMSSW Labo
+cp -r ~/LPHY2131/CMSSW Labo
 cmsenv
 scram b
 cd ../..
