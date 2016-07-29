@@ -3,7 +3,8 @@
 #Download the virtual machine from http://opendata.cern.ch/VM/CMS#how
 #after booting, change the keyboard layout (if needed)
 #git clone https://github.com/delaere/LPHY2131.git
-#. LPHY2131/install.sh
+#cd LPHY2131
+#. install.sh
 
 xmessage -buttons Ok:0 -nearmouse "Installing CMSSW 5.3.32 (used for 2011 data processing)" -timeout 5 &
 cmsrel CMSSW_5_3_32
