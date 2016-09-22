@@ -8,9 +8,11 @@ TString var = "transvMass";
 Int_t bins = 25;
 Float_t low = 20;
 Float_t high = 120;
+// the changes in cuts must be done here
 TString cuts_signalregion  = "nElectrons>=1";
 TString cuts_controlregion = "nElectrons>=1";
-TFile* data_file = TFile::Open("El2010data_flat.root");
+// do not forget to change the Ntuplefiles with the list of Ntuples data files of either electrons or muons
+TFile* data_file = TFile::Open("Ntuplefiles");
 TFile* simu_file = TFile::Open("delpheAnalysisW.root");
 Float_t scale_factor = 1.;
 

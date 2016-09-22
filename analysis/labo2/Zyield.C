@@ -7,9 +7,11 @@ TString var = "invMass";
 Int_t bins = 30;
 Float_t low = 50;
 Float_t high = 140;
+// the changes in cuts must be done here
 TString cuts = "nElectrons==2";
 // files
-TFile* data_file = TFile::Open("El2010data_flat.root");
+// change "Ntuplefiles" with the name of Ntuples files of either electrons or muons
+TFile* data_file = TFile::Open("Ntuplefiles");
 TFile* simu_file = TFile::Open("delpheAnalysisZ.root");
 // analytical form for the background
 TF1* f0 = new TF1("bkg","[0]+[1]*x",50,140); //to be adapted
