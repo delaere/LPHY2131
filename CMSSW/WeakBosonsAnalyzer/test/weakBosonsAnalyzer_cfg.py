@@ -2,6 +2,8 @@ import FWCore.ParameterSet.Config as cms
 
 process = cms.Process("ZDecay")
 process.load("FWCore.MessageService.MessageLogger_cfi")
+#show the message of run every 1000 events to improve the speed of the analyze
+process.MessageLogger.cerr.FwkReport.reportEvery = 1000
 
 # maximum number of events to be processed
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
@@ -15,13 +17,18 @@ process.options = cms.untracked.PSet( SkipEvent = cms.untracked.vstring('Product
 # for files at CERN on eos, use "root://eospublic.cern.ch/" followed by the eos path.
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
-        'file:///home/cms-opendata/data/Electron2010data_500files_1.root',
-        #'file:///media/sf_data_2/Electron2010data2_500files_2.root',
-        #'file:///media/sf_data_2/Electron2010data2_500files_3.root',
-        #'file:///media/sf_data_2/Electron2010data2_500files_4.root',
-        #'file:///media/sf_data_2/Electron2010data2_500files_5.root',
-        #'file:///media/sf_data_2/Electron2010data2_500files_6.root'
-        # 'root://eospublic.cern.ch//eos/opendata/cms/Run2010B/Electron/PATtuples/Electron_PAT_data_500files_1.root'
+        #Pat files containing the data for single electrons
+        #/nfs/user/vmassart/Pat  sur le serveur ingrid
+
+        #Pat files containing the data for single muons
+        #/nfs/user/jtoucheque/Pat
+        
+        #Pat files containing the data for double electrons
+        #/nfs/user/vmassart/Pat_Double_e
+        
+        #Pat fils contazining the data for double muons
+        #/nfs/user/jtoucheque/PatDouble
+        
     )
 )
 

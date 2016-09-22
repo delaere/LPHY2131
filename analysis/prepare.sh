@@ -1,33 +1,37 @@
 #/bin/env bash
 
 # some checks
-if [ ! -f ../../Delphes-3.3.0/delpheAnalysisZ.root ]; then
+if [ ! -f ../Delphes-3.3.2/delpheAnalysisZ.root ]; then
     echo "delpheAnalysisZ.root File not found!"
     echo "Did you complete lab 1?"
     exit
 fi
-if [ ! -f ../../Delphes-3.3.0/delpheAnalysisW.root ]; then
+if [ ! -f ../Delphes-3.3.2/delpheAnalysisW.root ]; then
     echo "delpheAnalysisW.root File not found!"
     echo "Did you complete lab 1?"
     exit
 fi
-if [ ! -f ../../data/Mu2010data_flat.root ]; then
-    echo "Mu2010data_flat.root File not found!"
+#switch the "NtupesfilesMuons" with the path of the list of Ntuples files available on the virtual machine
+if [ ! -f ../data/NtuplesfilesMuons ]; then
+    echo "NtuplesfilesMuons File not found!"
     echo "This should have been downloaded by the installation script."
     exit
 fi
-if [ ! -f ../../data/El2010data_flat.root ]; then
-    echo "Electron2010data_flat.root File not found!"
+#switch the "NtupesfilesElectrons" with the path of the list of Ntuples files available on the virtual machine
+if [ ! -f ../data/NtuplesfilesElectrons ]; then
+    echo "NtuplesfilesElectrons File not found!"
     echo "This should have been downloaded by the installation script."
     exit
 fi
 
 # create sym links
-ln -s ../../Delphes-3.3.0/delpheAnalysisZ.root labo2/
-ln -s ../../data/Mu2010data_flat.root labo2/
-ln -s ../../data/El2010data_flat.root labo2/
-ln -s ../../Delphes-3.3.0/delpheAnalysisW.root labo3/
-ln -s ../../data/Mu2010data_flat.root labo3/
-ln -s ../../data/El2010data_flat.root labo3/
+ln -s ../Delphes-3.3.2/delpheAnalysisZ.root labo2/
+#insert sym links for the input Ntuples datafiles in the labo2 directory for electrons and muons
+ln -s ../data/NtuplesfilesMuons labo2/
+ln -s ../data/NtuplesfilesElectrons labo2/
+ln -s ../Delphes-3.3.2/delpheAnalysisW.root labo3/
+#create sym links for the input Ntuples datafiles in the labo3 directory for electrons and muons
+ln -s ../data/NtuplesfilesMuons labo3/
+ln -s ../data/NtuplesfilesElectrons labo3/
 
 echo "Analysis workspace ready"
