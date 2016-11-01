@@ -1,10 +1,18 @@
-#i#!/bin/env sh
+#!/bin/env sh
 
 #Download the virtual machine from http://opendata.cern.ch/VM/CMS#how
 #after booting, change the keyboard layout (if needed)
 #git clone https://github.com/delaere/LPHY2131.git
-#cd LPHY2131
-#. install.sh
+#. LPHY2131/install.sh
+
+xmessage -buttons Ok:0 -nearmouse "Downloading sample CMS data files, MC and ntuples" -timeout 5 &
+mkdir LPHY2131_data
+wget --no-check-certificate https://cernbox.cern.ch/index.php/s/Vk3v8IfnRj1DzyV/download -O LPHY2131_data/ppChargedCurrentFullsim_ntuple.root
+wget --no-check-certificate https://cernbox.cern.ch/index.php/s/UhQBP40YBUwjnft/download -O LPHY2131_data/doubleMu2011_PAT.root
+wget --no-check-certificate https://cernbox.cern.ch/index.php/s/uUDwDNSxrUEDJXc/download -O LPHY2131_data/doubleEl2011_ntuple.root
+wget --no-check-certificate https://cernbox.cern.ch/index.php/s/Wu1G7I78mkHOTZh/download -O LPHY2131_data/doubleMu2011_ntuple.root
+wget --no-check-certificate https://cernbox.cern.ch/index.php/s/epixhaNsCGrRipo/download -O LPHY2131_data/singleEl2011_ntuple.root
+wget --no-check-certificate https://cernbox.cern.ch/index.php/s/rQJTwPcmGqGUZEP/download -O LPHY2131_data/singleMu2011_ntuple.root
 
 xmessage -buttons Ok:0 -nearmouse "Installing CMSSW 5.3.32 (used for 2011 data processing)" -timeout 5 &
 cmsrel CMSSW_5_3_32
