@@ -47,7 +47,5 @@ Double_t myPowerlaw(Double_t* x, Double_t* par)
 //Voigtian function
 Double_t myVoigt(Double_t* x, Double_t* par)
 {
-	return par[0]*TMath::Voigt(x[0]-par[1],par[2],par[3]);		
+  return par[0]*TMath::Voigt(x[0]-par[1],par[2],par[3]) + exp(par[4]+par[5]*x[0]);		
 }
-
-
