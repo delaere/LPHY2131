@@ -17,18 +17,8 @@ process.options = cms.untracked.PSet( SkipEvent = cms.untracked.vstring('Product
 # for files at CERN on eos, use "root://eospublic.cern.ch/" followed by the eos path.
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
-        #Pat files containing the data for single electrons
-        #/nfs/user/vmassart/Pat  sur le serveur ingrid
-
-        #Pat files containing the data for single muons
-        #/nfs/user/jtoucheque/Pat
-        
-        #Pat files containing the data for double electrons
-        #/nfs/user/vmassart/Pat_Double_e
-        
-        #Pat fils contazining the data for double muons
-        #/nfs/user/jtoucheque/PatDouble
-        
+        #PAT fils contazining the data for double muons
+        "file:///home/cms-opendata/LPHY2131/LPHY2131_data/doubleMu2011_PAT.root"     
     )
 )
 
