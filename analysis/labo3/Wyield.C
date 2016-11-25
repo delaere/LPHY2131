@@ -14,8 +14,8 @@ Int_t bins = 25;
 Float_t low = 20;
 Float_t high = 120;
 // the changes in cuts must be done here
-TString cuts_signalregion  = "nElectrons>=1"
-TString cuts_controlregion = "nElectrons>=1"
+TString cuts_signalregion  = "nElectrons>=1";
+TString cuts_controlregion = "nElectrons>=1";
 // input files
 // these points to the default files for this lab. 
 // data_file is the data ntuple you want to use. Pick either electrons or muons 
