@@ -7,11 +7,12 @@
 
 xmessage -buttons Ok:0 -nearmouse "Downloading sample CMS data files, MC and ntuples" -timeout 5 &
 mkdir LPHY2131_data
-wget --no-check-certificate https://cernbox.cern.ch/index.php/s/Vk3v8IfnRj1DzyV/download -O LPHY2131_data/ppChargedCurrentFullsim_ntuple.root
-wget --no-check-certificate https://cernbox.cern.ch/index.php/s/UhQBP40YBUwjnft/download -O LPHY2131_data/doubleMu2011_PAT.root
-wget --no-check-certificate https://cernbox.cern.ch/index.php/s/uUDwDNSxrUEDJXc/download -O LPHY2131_data/doubleEl2011_ntuple.root
+wget --no-check-certificate https://cernbox.cern.ch/index.php/s/AInTeOOKfrcz1IA/download -O LPHY2131_data/ppChargedCurrentFullsim_ntuple.root
+wget --no-check-certificate https://cernbox.cern.ch/index.php/s/aa1I9COX7mqHUuo/download -O LPHY2131_data/ppNeutralCurrentFullsim_ntuple.root
+wget --no-check-certificate https://cernbox.cern.ch/index.php/s/wO6JNKMgWEz6dBU/download -O LPHY2131_data/doubleMu2011_PAT.root
+wget --no-check-certificate https://cernbox.cern.ch/index.php/s/5Qy6eqba6Sxczuk/download -O LPHY2131_data/doubleEl2011_ntuple.root
 wget --no-check-certificate https://cernbox.cern.ch/index.php/s/gXhShqac0pdLXTA/download -O LPHY2131_data/doubleMu2011_ntuple.root
-wget --no-check-certificate https://cernbox.cern.ch/index.php/s/epixhaNsCGrRipo/download -O LPHY2131_data/singleEl2011_ntuple.root
+wget --no-check-certificate https://cernbox.cern.ch/index.php/s/kZSKh8Ux3ZfsdOI/download -O LPHY2131_data/singleEl2011_ntuple.root
 wget --no-check-certificate https://cernbox.cern.ch/index.php/s/hNXV6wUFj31j7NP/download -O LPHY2131_data/singleMu2011_ntuple.root
 
 xmessage -buttons Ok:0 -nearmouse "Installing CMSSW 5.3.32 (used for 2011 data processing)" -timeout 5 &
@@ -46,5 +47,8 @@ cd
 
 xmessage -buttons Ok:0 -nearmouse "Update the VM..." -timeout 5 &
 sudo cernvm-update -a
+
+xmessage -buttons Ok:0 -nearmouse "Install LibreOffice..." -timeout 5 &
+sudo yum install libreoffice-writer libreoffice-calc -y
 
 xmessage -buttons Ok:0 -nearmouse "DONE" -timeout 5 &
