@@ -28,6 +28,7 @@ fi
 ln -sf ../../../Delphes-3.3.2/delpheAnalysisZ.root labo2/
 ln -sf ../../../LPHY2131_data/doubleMu2011_ntuple.root labo2/
 ln -sf ../../../LPHY2131_data/doubleEl2011_ntuple.root labo2/
+ln -sf ../../../LPHY2131_data/ppNeutralCurrentFullsim_ntuple.root labo2/
 ln -sf ../../../Delphes-3.3.2/delpheAnalysisW.root labo3/
 ln -sf ../../../LPHY2131_data/singleMu2011_ntuple.root labo3/
 ln -sf ../../../LPHY2131_data/singleEl2011_ntuple.root labo3/
