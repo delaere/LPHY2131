@@ -67,8 +67,8 @@ TObjArray *mc = new TObjArray(2);
 mc->Add(hsimu);
 mc->Add(hbackground);
 TFractionFitter* fit = new TFractionFitter(hdata, mc);
-fit->Constrain(0,0.0,1.0);
 fit->Constrain(1,0.0,1.0);
+fit->Constrain(2,0.0,1.0);
 fit->Fit();
 
 // get the result
