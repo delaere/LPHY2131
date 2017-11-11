@@ -47,6 +47,8 @@ void CreateTreeFromDelphes(TString input, TString output_tree)
    unsigned int nmuons, nelectrons, njets;
    // create output
    TFile *file = new TFile(output_tree,"create");
+   TDirectory * LPHY2131analysisDir = file->mkdir("LPHY2131analysis");
+   LPHY2131analysisDir->cd();
    TTree *T = new TTree("WeakBosonsAnalysis","WeakBosonsAnalysis");
    // define the branches in the output
    T->Branch("nMuons",&nMuons,"nMuons/I");
