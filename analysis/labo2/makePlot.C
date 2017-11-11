@@ -43,7 +43,7 @@ data_file->cd("LPHY2131analysis");
 hdata->SetDirectory(gDirectory);
 WeakBosonsAnalysis->Draw(Form("%s>>%s_data",(const char*)var,(const char*)var),cuts,"E0 P0");
 hdata->SetMarkerStyle(20);
-simu_file->cd();
+simu_file->cd("LPHY2131analysis");
 hsimu->SetDirectory(gDirectory);
 WeakBosonsAnalysis->Draw(Form("%s>>%s_simu",(const char*)var,(const char*)var),cuts,"HIST SAME");
 hsimu->Scale(scale_factor);

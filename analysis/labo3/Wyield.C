@@ -51,7 +51,6 @@ WeakBosonsAnalysis->Draw(Form("%s>>%s_bkg",(const char*)var,(const char*)var),cu
 hbkg->SetFillColor(kBlue);
 hbkg->Scale(hdata->GetEntries()/hbkg->GetEntries()/2.);
 simu_file->cd("LPHY2131analysis");
-//simu_file->cd();
 hsimu->SetDirectory(gDirectory);
 WeakBosonsAnalysis->Draw(Form("%s>>%s_simu",(const char*)var,(const char*)var),cuts_signalregion,"HIST SAME");
 hsimu->Scale(hdata->GetEntries()/hsimu->GetEntries()/2.);
