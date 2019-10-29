@@ -7,13 +7,13 @@
 
 xmessage -buttons Ok:0 -nearmouse "Downloading sample CMS data files, MC and ntuples" -timeout 5 &
 mkdir LPHY2131_data
-wget --no-check-certificate https://cernbox.cern.ch/index.php/s/AInTeOOKfrcz1IA/download -O LPHY2131_data/ppChargedCurrentFullsim_ntuple.root
-wget --no-check-certificate https://cernbox.cern.ch/index.php/s/aa1I9COX7mqHUuo/download -O LPHY2131_data/ppNeutralCurrentFullsim_ntuple.root
-wget --no-check-certificate https://cernbox.cern.ch/index.php/s/wO6JNKMgWEz6dBU/download -O LPHY2131_data/doubleMu2011_PAT.root
-wget --no-check-certificate https://cernbox.cern.ch/index.php/s/5Qy6eqba6Sxczuk/download -O LPHY2131_data/doubleEl2011_ntuple.root
-wget --no-check-certificate https://cernbox.cern.ch/index.php/s/gXhShqac0pdLXTA/download -O LPHY2131_data/doubleMu2011_ntuple.root
-wget --no-check-certificate https://cernbox.cern.ch/index.php/s/kZSKh8Ux3ZfsdOI/download -O LPHY2131_data/singleEl2011_ntuple.root
-wget --no-check-certificate https://cernbox.cern.ch/index.php/s/hNXV6wUFj31j7NP/download -O LPHY2131_data/singleMu2011_ntuple.root
+wget --no-check-certificate -nv --show-progress https://cernbox.cern.ch/index.php/s/AInTeOOKfrcz1IA/download -O LPHY2131_data/ppChargedCurrentFullsim_ntuple.root
+wget --no-check-certificate -nv --show-progress https://cernbox.cern.ch/index.php/s/aa1I9COX7mqHUuo/download -O LPHY2131_data/ppNeutralCurrentFullsim_ntuple.root
+wget --no-check-certificate -nv --show-progress https://cernbox.cern.ch/index.php/s/wO6JNKMgWEz6dBU/download -O LPHY2131_data/doubleMu2011_PAT.root
+wget --no-check-certificate -nv --show-progress https://cernbox.cern.ch/index.php/s/5Qy6eqba6Sxczuk/download -O LPHY2131_data/doubleEl2011_ntuple.root
+wget --no-check-certificate -nv --show-progress https://cernbox.cern.ch/index.php/s/gXhShqac0pdLXTA/download -O LPHY2131_data/doubleMu2011_ntuple.root
+wget --no-check-certificate -nv --show-progress https://cernbox.cern.ch/index.php/s/kZSKh8Ux3ZfsdOI/download -O LPHY2131_data/singleEl2011_ntuple.root
+wget --no-check-certificate -nv --show-progress https://cernbox.cern.ch/index.php/s/hNXV6wUFj31j7NP/download -O LPHY2131_data/singleMu2011_ntuple.root
 
 xmessage -buttons Ok:0 -nearmouse "Installing CMSSW 5.3.32 (used for 2011 data processing)" -timeout 5 &
 cmsrel CMSSW_5_3_32
