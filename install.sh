@@ -45,10 +45,4 @@ make -j 4
 make -j 4 display
 cd
 
-xmessage -buttons Ok:0 -nearmouse "Update the VM..." -timeout 5 &
-echo password | sudo -S cernvm-update -a
-
-xmessage -buttons Ok:0 -nearmouse "Install LibreOffice..." -timeout 5 &
-sudo yum install libreoffice-writer libreoffice-calc -y
-
 xmessage -buttons Ok:0 -nearmouse "DONE" -timeout 5 &
