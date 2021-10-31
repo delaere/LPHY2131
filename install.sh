@@ -45,4 +45,9 @@ make -j 4
 make -j 4 display
 cd
 
+xmessage -buttons Ok:0 -nearmouse "Jupyter" -timeout 5 &
+echo -e 'password\n' | sudo -S -s yum install python3-devel -y
+sudo pip3 install jupyterlab
+sudo pip3 install mplhep uproot awkward probfit
+
 xmessage -buttons Ok:0 -nearmouse "DONE" -timeout 5 &
