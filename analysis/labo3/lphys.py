@@ -11,7 +11,7 @@ import probfit
 # This file contains a set of helper functions used in the various Notebooks.
 
 
-def analyzeTree(tree, branch, simpleselection=None, selection=None, index=None, step_size="50 MB"):
+def analyzeTree(tree, branch, simpleselection=None, selection=None, index=None, step_size="10 MB"):
     selected = ak.Array([])
     for batch in tree.iterate(step_size=step_size):
         if simpleselection:
