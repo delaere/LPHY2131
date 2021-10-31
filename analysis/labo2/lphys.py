@@ -52,7 +52,7 @@ class curve:
 # this function allows to plot two simple histograms side by side, for simulation and data
 def sidePlot(data, simu, xlim, xlabel, ylabel='Probability', nbins=100, islog=True, color='g', density=True):
     fig, axs = plt.subplots(1, 2, figsize=(10, 5), sharey=True)
-    axs[0].hist(data, nbins, density=density, facecolor=color, alpha=0.75);
+    axs[0].hist(data, nbins, range=xlim, density=density, facecolor=color, alpha=0.75);
     axs[0].set_xlabel(xlabel)
     axs[0].set_ylabel(ylabel)
     axs[0].set_xlim(*xlim)
@@ -61,7 +61,7 @@ def sidePlot(data, simu, xlim, xlabel, ylabel='Probability', nbins=100, islog=Tr
     textypos = axs[0].get_ylim()[1]/10. if islog else axs[0].get_ylim()[1]*0.8
     axs[0].text(textxpos, textypos, r'data')
     axs[0].grid(True)
-    axs[1].hist(simu, 100, density=density, facecolor=color, alpha=0.75);
+    axs[1].hist(simu, nbins, range=xlim, density=density, facecolor=color, alpha=0.75);
     axs[1].set_xlabel(xlabel)
     axs[1].set_xlim(*xlim)
     axs[1].text(textxpos, textypos, r'MC')
