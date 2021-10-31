@@ -1,5 +1,5 @@
-# LPHY2131
-Material for the LPHY2131 lab
+# LPHYS2131
+Material for the LPHYS2131 lab
 
 To install, follow the instructions below:
 
@@ -14,3 +14,5 @@ This prepares the environment for the lab:
 - installs CMSSW 7.1.1 (used to setup the analysis environment)
 - installs and configures MadGraph 5
 - installs Delphes 3.3.2
+
+More details on the wiki.
