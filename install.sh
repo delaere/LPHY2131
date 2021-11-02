@@ -5,7 +5,6 @@
 #git clone https://github.com/delaere/LPHY2131.git LPHYS2131
 #LPHYS2131/install.sh
 
-#!/bin/sh
 TMPRC=$(mktemp)
 cat > $TMPRC << EOF
 PS1='\[\e]2;CMS Shell\a\]\[\e[1;32m\]CMS Shell >\[\e[m\]\[\e[0;32m\] '
