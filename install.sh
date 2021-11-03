@@ -50,16 +50,13 @@ TZ_DST=$(readlink /cvmfs/cernvm-prod.cern.ch/cvm3/etc/localtime)
 singularity exec   -B $TZ_SRC:$TZ_DST   -B /usr/share/X11/xkb/rules   -B /etc/mtab   -B /etc/cvmfs   -B /etc/cms   -B /cvmfs   -B /eos   /cvmfs/cernvm-prod.cern.ch/cvm3 /bin/bash --noprofile --rcfile $TMPRC
 rm -f $TMPRC
 
-xmessage -buttons Ok:0 -nearmouse "Installing Jupyter and required modules" -timeout 5 &
-echo -e 'password\n' | sudo -S -s yum install python3-devel -y
-sudo pip3 install jupyterlab
-sudo pip3 install mplhep uproot awkward probfit
-
-xmessage -buttons Ok:0 -nearmouse "Installing LibreOffice" -timeout 5 &
-sudo -S -s yum install libreoffice-writer libreoffice-calc -y
+xmessage -buttons Ok:0 -nearmouse "Installing LibreOffice, Jupyter and required modules" -timeout 5 &
+echo -e 'password\n' | sudo -S yum install libreoffice-writer libreoffice-calc python3-devel -y
+echo -e 'password\n' | sudo -S pip3 install jupyterlab mplhep uproot awkward probfit
 
 xmessage -buttons Ok:0 -nearmouse "Downloading sample CMS data files, MC and ntuples" -timeout 5 &
 mkdir LPHYS2131_data
+echo "Downloading files... this will take a while!"
 wget --no-check-certificate -nv https://cernbox.cern.ch/index.php/s/AInTeOOKfrcz1IA/download -O LPHYS2131_data/ppChargedCurrentFullsim_ntuple.root
 wget --no-check-certificate -nv https://cernbox.cern.ch/index.php/s/aa1I9COX7mqHUuo/download -O LPHYS2131_data/ppNeutralCurrentFullsim_ntuple.root
 wget --no-check-certificate -nv https://cernbox.cern.ch/index.php/s/wO6JNKMgWEz6dBU/download -O LPHYS2131_data/doubleMu2011_PAT.root
