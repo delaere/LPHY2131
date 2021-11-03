@@ -18,7 +18,7 @@ process.options = cms.untracked.PSet( SkipEvent = cms.untracked.vstring('Product
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
         #PAT fils contazining the data for double muons
-        "file:///home/cms-opendata/LPHY2131_data/doubleMu2011_PAT.root"     
+        "file:///home/cms-opendata/LPHYS2131_data/doubleMu2011_PAT.root"     
     )
 )
 
