@@ -11,7 +11,7 @@ import probfit
 # This file contains a set of helper functions used in the various Notebooks.
 
 
-def analyzeTree(tree, branch, simpleselection=None, selection=None, index=None, step_size="50 MB"):
+def analyzeTree(tree, branch, simpleselection=None, selection=None, index=None, step_size="10 MB"):
     selected = ak.Array([])
     for batch in tree.iterate(step_size=step_size):
         if simpleselection:
@@ -80,7 +80,7 @@ def plot(data, simu, curves, xlim, xlabel, ylabel='Probability', nbins=100, islo
     bin_centers = (bin_edges+bin_width/2)[:-1]
    
     if type(simu) is ak.highlevel.Array:
-        ax.hist(simu, nbins, density=density, facecolor=color, alpha=0.75, label='MC'); # simulation
+        ax.hist(simu, bins=bin_edges, density=density, facecolor=color, alpha=0.75, label='MC'); # simulation
     else:
         assert(type(simu) is list)
         if len(simu)>0:

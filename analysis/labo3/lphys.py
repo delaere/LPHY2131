@@ -20,7 +20,7 @@ def analyzeTree(tree, branch, simpleselection=None, selection=None, index=None, 
             batchsel = selection(batch,branch)
         else:
             batchsel = batch[branch]
-        if index: # if there is an index, we select that column
+        if index is not None: # if there is an index, we select that column
             batchsel = batchsel[:,index]
         elif (type(branch) is str): # otherwise, we flatten the selection
             batchsel = ak.flatten(batchsel, axis=None)
@@ -80,7 +80,7 @@ def plot(data, simu, curves, xlim, xlabel, ylabel='Probability', nbins=100, islo
     bin_centers = (bin_edges+bin_width/2)[:-1]
    
     if type(simu) is ak.highlevel.Array:
-        ax.hist(simu, nbins, density=density, facecolor=color, alpha=0.75, label='MC'); # simulation
+        ax.hist(simu, bins=bin_edges, density=density, facecolor=color, alpha=0.75, label='MC'); # simulation
     else:
         assert(type(simu) is list)
         if len(simu)>0:
