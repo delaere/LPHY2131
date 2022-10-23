@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import mplhep as hep
 import scipy
 import iminuit
-import probfit
+#import probfit
 
 # This file contains a set of helper functions used in the various Notebooks.
 
