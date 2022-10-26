@@ -121,8 +121,7 @@ class Plotter:
         self.simu = None
         self.density = None
         self.color = color
-        
-        self.xe = self.cost.xe # bin edges
+        self.xe = cost.xe if cost is not None else np.array([]) # bin edges
         self.cx = 0.5 * (self.xe[1:] + self.xe[:-1]) # bin centers
         
     def setSimulation(self,simu):
@@ -155,20 +154,25 @@ class Plotter:
             plt.plot(self.cx,np.array([curve.func(xi) for xi in self.cx]), 
                      label=curve.label, color=curve.color, lw=curve.linewidth)
 
-    def __call__(self, args=None):
+    def __call__(self, args=None,data=None):
         hep.style.use(hep.style.CMS)
         if self.cmsText:
             hep.cms.text("Open Data")
-        xe = self.xe
-        cx = self.cx
+        if data is None:
+            xe = self.xe
+            cx = self.cx
+        else:
+            xe = data[1]
+            cx = 0.5 * (xe[1:] + xe[:-1])
+            
         plt.xlim(xe[0],xe[-1])
         
         # data
-        n = self.cost.data
+        n = self.cost.data if data is None else data[0]
         plt.errorbar(cx, n, n ** 0.5, fmt="ok", label='Data')
         
         # fit 
-        if args is not None:
+        if args is not None and self.cost is not None:
             if isinstance(self.cost,iminuit.cost.ExtendedBinnedNLL):
                     sm = np.diff(self.cost.scaled_cdf(xe, args[0], 0, *args[2:]))
                     bm = np.diff(self.cost.scaled_cdf(xe, 0, args[1], *args[2:]))
