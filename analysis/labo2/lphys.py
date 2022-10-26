@@ -40,6 +40,9 @@ class sample:
         self.norm = norm if norm else 1.
         if integral:
             self.norm = integral/len(events)
+            
+    def histogram(self):
+        pass
 
 # The curve class is a simple helper built from a function and display options.
 class curve:
@@ -152,34 +155,41 @@ class Plotter:
             plt.plot(self.cx,np.array([curve.func(xi) for xi in self.cx]), 
                      label=curve.label, color=curve.color, lw=curve.linewidth)
 
-    def __call__(self, args):
+    def __call__(self, args=None):
         hep.style.use(hep.style.CMS)
         if self.cmsText:
             hep.cms.text("Open Data")
         xe = self.xe
         cx = self.cx
         plt.xlim(xe[0],xe[-1])
+        
         # data
         n = self.cost.data
         plt.errorbar(cx, n, n ** 0.5, fmt="ok", label='Data')
+        
         # fit 
-        if self.fill:
-            sm = np.diff(self.cost.scaled_cdf(xe, args[0], 0, *args[2:]))
-            bm = np.diff(self.cost.scaled_cdf(xe, 0, args[1], *args[2:]))
-            plt.stairs(bm, xe, fill=True, color="C1", label = "bkg shape", lw=4)
-            plt.stairs(bm + sm, xe, baseline = bm, fill=True, color="C0", label = "S+B fit", lw=4)
-        else:
-            bkg_model = curve(lambda x:self.cost.scaled_cdf(x,0,*args[1:]),'Bkg shape',"C1",4)
-            tot_model = curve(lambda x:self.cost.scaled_cdf(x,**args.to_dict()),'S+B fit',"C0",4)
-            for crve in [bkg_model,tot_model]:
-                plt.plot(self.cx,np.array([crve.func(xi) for xi in self.cx]), 
-                     label=crve.label, color=crve.color, lw=crve.linewidth)
-        # other curves
-        if self.curves is not None:
-            self.plotCurves()
+        if args is not None:
+            if isinstance(self.cost,iminuit.cost.ExtendedBinnedNLL):
+                    sm = np.diff(self.cost.scaled_cdf(xe, args[0], 0, *args[2:]))
+                    bm = np.diff(self.cost.scaled_cdf(xe, 0, args[1], *args[2:]))
+                    tm = sm+bm
+                    plt.stairs(sm+bm, xe, fill=self.fill, color="C0", label = "S+B fit", lw=4)
+                    plt.stairs(bm, xe, fill=self.fill, color="C1", label = "bkg shape", lw=4)
+
+
+            if isinstance(self.cost,iminuit.cost.Template):
+                shapes = [a*b for a,b in zip(self.cost._bbl_data[0],args)]
+                plt.stairs(shapes[0]+shapes[1], xe, fill=True, color="C0", label = "S+B fit", lw=4)
+                plt.stairs(shapes[1], xe, fill=True, color="C1", label = "bkg shape", lw=4)
+                #plt.stairs(mu + mu_err, xe, baseline=mu - mu_err, fill=True, color="C0")
+
         # Monte Carlo histograms
         if self.simu is not None:
             self.plotSimu()
+
+        # other curves
+        if self.curves is not None:
+            self.plotCurves()
         
         if self.logscale:
             plt.yscale('log')
