@@ -41,8 +41,8 @@ class sample:
         if integral:
             self.norm = integral/len(events)
             
-    def histogram(self):
-        pass
+    def plot(self,binedges):
+        plt.hist(self.events, binedges, color=self.color, label=self.label,weights = self.norm)
 
 # The curve class is a simple helper built from a function and display options.
 class curve:
@@ -51,6 +51,10 @@ class curve:
         self.label = label
         self.color = color
         self.linewidth = linewidth
+        
+    def plot(self,linspace):
+        plt.plot(linspace,np.array([self.func(xi) for xi in linspace]), 
+                     label=self.label, color=self.color, lw=self.linewidth)
 
 # this function allows to plot two simple histograms side by side, for simulation and data
 def sidePlot(data, simu, xlim, xlabel, ylabel='Probability', nbins=100, islog=True, color='g', density=True):
@@ -73,6 +77,7 @@ def sidePlot(data, simu, xlim, xlabel, ylabel='Probability', nbins=100, islog=Tr
 # this function allows to plot simulations (one or several), data, and parametric curves.
 # the default mode is to use the helper classes for samples and curves.
 # In the special case where only one sample is needed, options can be passed directly as arguments.
+# TODO: this function can soon be dropped or made into a proxy for Plotter
 def plot(data, simu, curves, xlim, xlabel, ylabel='Probability', nbins=100, islog=True, color='g', density=True):
     fig, ax = plt.subplots(figsize=(10, 10))
     hep.style.use(hep.style.CMS)
@@ -119,7 +124,7 @@ class Plotter:
         self.fill = fill
         self.curves = None
         self.simu = None
-        self.density = None
+        self.density = density
         self.color = color
         self.xe = cost.xe if cost is not None else np.array([]) # bin edges
         self.cx = 0.5 * (self.xe[1:] + self.xe[:-1]) # bin centers
@@ -151,8 +156,9 @@ class Plotter:
 
     def plotCurves(self):
         for curve in self.curves:
-            plt.plot(self.cx,np.array([curve.func(xi) for xi in self.cx]), 
-                     label=curve.label, color=curve.color, lw=curve.linewidth)
+            curve.plot(self.cx)
+            #plt.plot(self.cx,np.array([curve.func(xi) for xi in self.cx]), 
+            #         label=curve.label, color=curve.color, lw=curve.linewidth)
 
     def __call__(self, args=None,data=None):
         hep.style.use(hep.style.CMS)
@@ -164,12 +170,16 @@ class Plotter:
         else:
             xe = data[1]
             cx = 0.5 * (xe[1:] + xe[:-1])
+            self.xe = xe
             
         plt.xlim(xe[0],xe[-1])
         
         # data
         n = self.cost.data if data is None else data[0]
-        plt.errorbar(cx, n, n ** 0.5, fmt="ok", label='Data')
+        if self.density:
+            plt.errorbar(cx, n, n*0, fmt="ok", label='Data')
+        else:
+            plt.errorbar(cx, n, n ** 0.5, fmt="ok", label='Data')
         
         # fit 
         if args is not None and self.cost is not None:
