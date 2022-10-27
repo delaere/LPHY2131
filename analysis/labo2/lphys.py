@@ -77,40 +77,11 @@ def sidePlot(data, simu, xlim, xlabel, ylabel='Probability', nbins=100, islog=Tr
 # this function allows to plot simulations (one or several), data, and parametric curves.
 # the default mode is to use the helper classes for samples and curves.
 # In the special case where only one sample is needed, options can be passed directly as arguments.
-# TODO: this function can soon be dropped or made into a proxy for Plotter
 def plot(data, simu, curves, xlim, xlabel, ylabel='Probability', nbins=100, islog=True, color='g', density=True):
-    fig, ax = plt.subplots(figsize=(10, 10))
-    hep.style.use(hep.style.CMS)
-    hep.cms.text("Open Data")
-    ax.set_xlim(*xlim)
-    bin_width = (xlim[1]-xlim[0])/nbins
-    bin_edges = np.arange(xlim[0],xlim[1]+bin_width,bin_width)
-    bin_centers = (bin_edges+bin_width/2)[:-1]
-   
-    if type(simu) is ak.highlevel.Array:
-        ax.hist(simu, bins=bin_edges, density=density, facecolor=color, alpha=0.75, label='MC'); # simulation
-    else:
-        assert(type(simu) is list)
-        if len(simu)>0:
-            samples = [ s.events for s in simu ]
-            label = [ s.label for s in simu ]
-            norm = [ [s.norm]*len(s.events) for s in simu ]
-            color = [ s.color for s in simu ]
-            ax.hist(samples, bin_edges, density=density, alpha=0.75, stacked=True, color=color, label=label,weights = norm)
-
-    data_x,_ = np.histogram(ak.to_numpy(data), bins=bin_edges, density=density ) # histogram the data
-    plt.errorbar(x=bin_centers, y=data_x, yerr=np.sqrt(data_x*len(data))/len(data),
-                 fmt='ko', # 'k' means black and 'o' is for circles 
-                 label='Data')
-    
-    x = np.arange(xlim[0],xlim[1],(xlim[1]-xlim[0])/(nbins*10))
-    for curve in curves:
-        plt.plot(x,np.array([curve.func(xi) for xi in x]), label=curve.label, color=curve.color, lw=curve.linewidth)
-    
-    if islog: ax.set_yscale('log')
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel(ylabel)
-    ax.legend();
+    myplot = Plotter(None, logscale=islog, legend=True, xlabel=xlabel, ylabel=ylabel)
+    myplot.setSimulation(simu)
+    myplot.setCurves(curves)
+    myplot(data=np.histogram(ak.to_numpy(data).astype('double'), bins=nbins, range=xlim,density=density))
 
 class Plotter:
     def __init__(self, cost, xlabel="Var", ylabel="Events", text = True, logscale = False, legend = False, fill = True, density = True, color='g'):
