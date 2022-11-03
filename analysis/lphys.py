@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import mplhep as hep
 import scipy
 import iminuit
+from math import pi
 from inspect import signature, stack, Parameter
 from functools import wraps
 
@@ -254,8 +255,8 @@ def breitwigner(x, m, gamma):
     mm = m*m
     xm = x*x-mm
     gg = gamma*gamma
-    s = sqrt(mm*(mm+gg))
-    N = (2*sqrt(2)/pi)*m*gamma*s/sqrt(mm+s)
+    s = np.sqrt(mm*(mm+gg))
+    N = (2*np.sqrt(2)/pi)*m*gamma*s/np.sqrt(mm+s)
     return N/(xm*xm+mm*gg)
 
 # Decorator to make the definition of s+b more natural. 
@@ -297,6 +298,25 @@ def signalbackground(background,signal):
         parameters=tuple(list(f1_sig.parameters.values())[1:])+tuple(list(f2_sig.parameters.values())[1:])
         sig = signature(f)
         sig = sig.replace(parameters=(Parameter("x",Parameter.POSITIONAL_OR_KEYWORD),Parameter("s",Parameter.POSITIONAL_OR_KEYWORD),Parameter("b",Parameter.POSITIONAL_OR_KEYWORD))+parameters)
+        wrapper.__signature__ = sig
+        
+        return wrapper
+    
+    return decorator
+
+# Decorator to copy the args of an existing function 
+# This creates a significant overhead in the calculation, but we can afford it.
+def copyargs(old):
+    """Decorator factory that makes a function with 
+       combined arguments from signal and background pdf functions"""
+
+    def decorator(f):
+        @wraps(f)
+        def wrapper(x,s,b,*args,**kwargs):
+            return f(x,s,b,args,kwargs)
+
+        # Override signature
+        sig = signature(old)
         wrapper.__signature__ = sig
         
         return wrapper
