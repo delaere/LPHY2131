@@ -1,12 +1,12 @@
 #/bin/env bash
 
 # some checks
-if [ ! -f ../../Delphes-3.3.2/delpheAnalysisZ.root ]; then
+if [ ! -f ../../Delphes-3.5.0/delpheAnalysisZ.root ]; then
     echo "delpheAnalysisZ.root File not found!"
     echo "Did you complete lab 1?"
     exit
 fi
-if [ ! -f ../../Delphes-3.3.2/delpheAnalysisW.root ]; then
+if [ ! -f ../../Delphes-3.5.0/delpheAnalysisW.root ]; then
     echo "delpheAnalysisW.root File not found!"
     echo "Did you complete lab 1?"
     exit
@@ -25,11 +25,11 @@ if [ ! -f ../../LPHYS2131_data/doubleEl2011_ntuple.root ]; then
 fi
 
 # create sym links
-ln -sf ../../../Delphes-3.3.2/delpheAnalysisZ.root labo2/
+ln -sf ../../../Delphes-3.5.0/delpheAnalysisZ.root labo2/
 ln -sf ../../../LPHYS2131_data/doubleMu2011_ntuple.root labo2/
 ln -sf ../../../LPHYS2131_data/doubleEl2011_ntuple.root labo2/
 ln -sf ../../../LPHYS2131_data/ppNeutralCurrentFullsim_ntuple.root labo2/
-ln -sf ../../../Delphes-3.3.2/delpheAnalysisW.root labo3/
+ln -sf ../../../Delphes-3.5.0/delpheAnalysisW.root labo3/
 ln -sf ../../../LPHYS2131_data/singleMu2011_ntuple.root labo3/
 ln -sf ../../../LPHYS2131_data/singleEl2011_ntuple.root labo3/
 ln -sf ../../../LPHYS2131_data/ppChargedCurrentFullsim_ntuple.root labo3/
