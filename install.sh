@@ -26,7 +26,10 @@ cd MG5_aMC_v2_9_12
 sed -i '/import os/aos.unsetenv("PYTHIA8DATA")' bin/mg5_aMC
 sed -i 's/6500/3500/g' ./madgraph/various/banner.py
 echo "install pythia8" | bin/mg5_aMC
-echo "install lhapdf6" | bin/mg5_aMC
+#this seems necessary in the VM... 
+if [ -d /nfs ]
+	echo "install lhapdf6" | bin/mg5_aMC
+fi
 cd -
 
 xmessage -buttons Ok:0 -nearmouse "Installing Delphes 3.5.0" -timeout 5 &
@@ -41,14 +44,28 @@ conda deactivate
 
 xmessage -buttons Ok:0 -nearmouse "Downloading sample CMS data files, MC and ntuples" -timeout 5 &
 mkdir LPHYS2131_data
-echo "Downloading files... this will take a while!"
-wget --no-check-certificate -nv https://cernbox.cern.ch/remote.php/dav/public-files/AInTeOOKfrcz1IA/LPHY2131tree_mc_W.root -O LPHYS2131_data/ppChargedCurrentFullsim_ntuple.root
-wget --no-check-certificate -nv https://cernbox.cern.ch/remote.php/dav/public-files/aa1I9COX7mqHUuo/LPHY2131tree_mc_Z.root -O LPHYS2131_data/ppNeutralCurrentFullsim_ntuple.root
-wget --no-check-certificate -nv https://cernbox.cern.ch/remote.php/dav/public-files/wO6JNKMgWEz6dBU/1C422B79-9235-E311-895A-0025905964C2_PAT.root -O LPHYS2131_data/doubleMu2011_PAT.root
-wget --no-check-certificate -nv https://cernbox.cern.ch/remote.php/dav/public-files/5Qy6eqba6Sxczuk/Ntuples_double_e.root -O LPHYS2131_data/doubleEl2011_ntuple.root
-wget --no-check-certificate -nv https://cernbox.cern.ch/remote.php/dav/public-files/gXhShqac0pdLXTA/Ntuples_Double_Mu_v2.root -O LPHYS2131_data/doubleMu2011_ntuple.root
-wget --no-check-certificate -nv https://cernbox.cern.ch/remote.php/dav/public-files/kZSKh8Ux3ZfsdOI/Ntuples_Single_e.root -O LPHYS2131_data/singleEl2011_ntuple.root
-wget --no-check-certificate -nv https://cernbox.cern.ch/remote.php/dav/public-files/hNXV6wUFj31j7NP/Ntuples_Single_Mu_v2.root -O LPHYS2131_data/singleMu2011_ntuple.root
+if [ -d /nfs ] ; then
+	echo "Creating symlinks to NFS."
+	cd LPHYS2131_data
+	ln -sf /nfs/data/LPHYS2131/ppChargedCurrentFullsim_ntuple.root
+	ln -sf /nfs/data/LPHYS2131/ppNeutralCurrentFullsim_ntuple.root
+	ln -sf /nfs/data/LPHYS2131/doubleMu2011_PAT.root
+	ln -sf /nfs/data/LPHYS2131/doubleEl2011_ntuple.root
+	ln -sf /nfs/data/LPHYS2131/doubleMu2011_ntuple.root 
+	ln -sf /nfs/data/LPHYS2131/singleEl2011_ntuple.root
+	ln -sf /nfs/data/LPHYS2131/singleMu2011_ntuple.root
+	cd ..
+else
+	echo "Downloading files... this will take a while!"
+	wget --no-check-certificate -nv https://cernbox.cern.ch/remote.php/dav/public-files/AInTeOOKfrcz1IA/LPHY2131tree_mc_W.root -O LPHYS2131_data/ppChargedCurrentFullsim_ntuple.root
+	wget --no-check-certificate -nv https://cernbox.cern.ch/remote.php/dav/public-files/aa1I9COX7mqHUuo/LPHY2131tree_mc_Z.root -O LPHYS2131_data/ppNeutralCurrentFullsim_ntuple.root
+	wget --no-check-certificate -nv https://cernbox.cern.ch/remote.php/dav/public-files/wO6JNKMgWEz6dBU/1C422B79-9235-E311-895A-0025905964C2_PAT.root -O LPHYS2131_data/doubleMu2011_PAT.root
+	wget --no-check-certificate -nv https://cernbox.cern.ch/remote.php/dav/public-files/5Qy6eqba6Sxczuk/Ntuples_double_e.root -O LPHYS2131_data/doubleEl2011_ntuple.root
+	wget --no-check-certificate -nv https://cernbox.cern.ch/remote.php/dav/public-files/gXhShqac0pdLXTA/Ntuples_Double_Mu_v2.root -O LPHYS2131_data/doubleMu2011_ntuple.root
+	wget --no-check-certificate -nv https://cernbox.cern.ch/remote.php/dav/public-files/kZSKh8Ux3ZfsdOI/Ntuples_Single_e.root -O LPHYS2131_data/singleEl2011_ntuple.root
+	wget --no-check-certificate -nv https://cernbox.cern.ch/remote.php/dav/public-files/hNXV6wUFj31j7NP/Ntuples_Single_Mu_v2.root -O LPHYS2131_data/singleMu2011_ntuple.root
+fi
+echo "DONE."
 
 xmessage -buttons Ok:0 -nearmouse "DONE" -timeout 5 &
 
