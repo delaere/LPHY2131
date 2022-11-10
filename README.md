@@ -26,14 +26,14 @@ Installers for Windows and Mac OSX are in the same directory.
 3. Start VirtualBox
 
 4. Create a new virtual machine using the provided image:
-  1. Click the blue 'New' icon
-  2. Pick a name for the machine and select 'Linux' and 'Debian (64-bit)'
-  3. Set the memory size to at least 4096 MB
-  4. Select 'Use an existing hard disk file' and choose 'LPHYS2131.vdi'
-  5. Select the newly created virtual machine and click the yellow 'Settings' icon
-  6. Select 'Display' and set 'Graphics Controller' to 'VBoxVGA'
-  7. Click 'OK'
-  8. Select the newly created virtual machine and click the green 'Start' icon
+   1. Click the blue 'New' icon
+   2. Pick a name for the machine and select 'Linux' and 'Debian (64-bit)'
+   3. Set the memory size to at least 4096 MB
+   4. Select 'Use an existing hard disk file' and choose 'LPHYS2131.vdi'
+   5. Select the newly created virtual machine and click the yellow 'Settings' icon
+   6. Select 'Display' and set 'Graphics Controller' to 'VBoxVGA'
+   7. Click 'OK'
+   8. Select the newly created virtual machine and click the green 'Start' icon
 
 Now, you should be in Linux session with the software required for LPHYS2131.
 To install, follow the instructions below:
@@ -41,7 +41,7 @@ To install, follow the instructions below:
 1. Open the Virtual Machine
 2. In a terminal, run the following two commands.
   - git clone https://github.com/delaere/LPHY2131.git LPHYS2131
-  - LPHYS2131/install.sh
+  - source LPHYS2131/install.sh
 
 This prepares the environment for the lab: 
 - downloads samples files and example scripts
