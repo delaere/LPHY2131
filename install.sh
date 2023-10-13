@@ -23,8 +23,8 @@ conda activate cms-analysis
 
 xmessage -buttons Ok:0 -nearmouse "Installing MadGraph 5" -timeout 5 &
 
-wget -qO- https://launchpad.net/mg5amcnlo/3.0/3.4.x/+download/MG5_aMC_v2.9.12.tar.gz | tar zxv
-cd MG5_aMC_v2_9_12
+wget -qO- https://launchpad.net/mg5amcnlo/3.0/3.5.x/+download/MG5aMC_LTS_v2.9.16.tar.gz  | tar zxv
+cd MG5_aMC_v2_9_16
 sed -i '/import os/aos.unsetenv("PYTHIA8DATA")' bin/mg5_aMC
 sed -i 's/6500/3500/g' ./madgraph/various/banner.py
 echo "install pythia8" | bin/mg5_aMC
