@@ -168,7 +168,7 @@ void CreateTreeFromDelphes(TString input, TString output_tree)
       do {
       	MET_pt = met->MET + gRandom->Gaus(0,6); // artificial smearing to fit data
       }
-      while(MET_pt<0)
+      while(MET_pt<0);
       MET_phi= met->Phi;
       MET_eta= met->Eta;
 
