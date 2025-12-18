@@ -165,6 +165,9 @@ class Plotter:
 
             if isinstance(self.cost,iminuit.cost.Template):
                 shapes = [a*b for a,b in zip(self.cost._bbl_data[0],args)]
+                # alternative calculation for most recent iminuit library
+                #shapes = [self.cost.prediction(diag)[0] for diag in [[1 if j == i else 0 for j in range(len(args))] for i in range(len(args)) ] ]
+                #shapes = [a * b for a, b in zip(shapes, args)]
                 plt.stairs(shapes[0]+shapes[1], xe, fill=True, color="C0", label = "S+B fit", lw=4)
                 plt.stairs(shapes[1], xe, fill=True, color="C1", label = "bkg shape", lw=4)
                 #plt.stairs(mu + mu_err, xe, baseline=mu - mu_err, fill=True, color="C0")
