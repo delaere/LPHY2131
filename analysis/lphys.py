@@ -141,6 +141,14 @@ def plot(data, simu, curves, xlim, xlabel, ylabel='Probability', nbins=100, islo
     myplot.setCurves(curves)
     myplot(data=np.histogram(ak.to_numpy(data).astype('double'), bins=nbins, range=xlim,density=density))
 
+# Expected counts per bin for each template of a Template fit, scaled by its fitted yield.
+def _templateComponents(cost, args):
+    args = list(args)
+    if hasattr(cost, "prediction"):  # recent iminuit: the prediction is linear in the yields
+        return [cost.prediction([a if j == i else 0. for j, a in enumerate(args)])[0]
+                for i in range(len(args))]
+    return [a * t for a, t in zip(cost._bbl_data[0], args)]  # older iminuit
+
 class Plotter:
     def __init__(self, cost, xlabel="Var", ylabel="Events", text = True, logscale = False, legend = False, fill = True, density = True, color='g'):
         self.cost = cost
@@ -221,10 +229,7 @@ class Plotter:
 
 
             if isinstance(self.cost,iminuit.cost.Template):
-                shapes = [a*b for a,b in zip(self.cost._bbl_data[0],args)]
-                # alternative calculation for most recent iminuit library
-                #shapes = [self.cost.prediction(diag)[0] for diag in [[1 if j == i else 0 for j in range(len(args))] for i in range(len(args)) ] ]
-                #shapes = [a * b for a, b in zip(shapes, args)]
+                shapes = _templateComponents(self.cost, args)
                 plt.stairs(shapes[0]+shapes[1], xe, fill=True, color="C0", label = "S+B fit", lw=4)
                 plt.stairs(shapes[1], xe, fill=True, color="C1", label = "bkg shape", lw=4)
                 #plt.stairs(mu + mu_err, xe, baseline=mu - mu_err, fill=True, color="C0")
