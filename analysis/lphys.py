@@ -6,29 +6,86 @@ import matplotlib.pyplot as plt
 import mplhep as hep
 import scipy
 import iminuit
+import re
+import warnings
 from math import pi
-from inspect import signature, stack, Parameter
+from inspect import signature, stack, Parameter, getsource
 from functools import wraps
 
 # This file contains a set of helper functions used in the various Notebooks.
 
-def analyzeTree(tree, branch, simpleselection=None, selection=None, index=None, step_size="10 MB"):
-    selected = ak.Array([])
-    for batch in tree.iterate(step_size=step_size):
-        if simpleselection:
-            batchsel = batch[simpleselection(batch)][branch]
-        elif selection:
-            batchsel = selection(batch,branch)
-        else:
-            batchsel = batch[branch]
-        if index is not None: # if there is an index, we select that column
-            batchsel = batchsel[:,index]
-        elif (type(branch) is str): # otherwise, we flatten the selection
-            batchsel = ak.flatten(batchsel, axis=None)
-        else: # unless branch is a list, in which case we do nothing.
-            pass
-        selected = ak.concatenate([selected,batchsel])
-    return selected
+def _neededBranches(tree, functions, branch):
+    """Guess which branches must be read: the requested output branch(es) plus every
+    branch name that appears in the source code of the selection functions.
+    Returns None (= read all branches) if this cannot be determined."""
+    if branch is None:
+        return None
+    keys = set(tree.keys())
+    needed = {branch} if isinstance(branch, str) else set(branch)
+    for function in functions:
+        try:
+            source = getsource(function)
+        except (OSError, TypeError):  # e.g. function defined in a way that hides its source
+            return None
+        needed |= {word for word in re.findall(r"\w+", source) if word in keys}
+    return sorted(needed)
+
+def _selectBatch(batch, branch, simpleselection, selection, index):
+    if simpleselection:
+        batchsel = batch[simpleselection(batch)][branch]
+    elif selection:
+        batchsel = selection(batch,branch)
+    else:
+        batchsel = batch[branch]
+    if index is not None: # if there is an index, we select that column
+        batchsel = batchsel[:,index]
+    elif (type(branch) is str): # otherwise, we flatten the selection
+        batchsel = ak.flatten(batchsel, axis=None)
+    else: # unless branch is a list, in which case we do nothing.
+        pass
+    return batchsel
+
+def analyzeTree(tree, branch, simpleselection=None, selection=None, index=None, step_size="50 MB"):
+    """Apply a selection to all events of a tree and return the selected branch(es).
+
+    To save time and memory, only the branches used by the selection (and the requested
+    output branches) are read from the file.
+
+    `simpleselection` or `selection` can also be a dictionary {name: function}. The file is
+    then read only once, all the selections are applied, and a dictionary {name: result}
+    is returned. Example:
+        regions = analyzeTree(tree, ["transvMass"], selection={"signal": sig, "control": ctl})
+        regions["signal"], regions["control"]
+    """
+    chosen = simpleselection if simpleselection is not None else selection
+    asdict = isinstance(chosen, dict)
+    selections = chosen if asdict else {None: chosen}
+    usesimple = simpleselection is not None
+    functions = [f for f in selections.values() if f is not None]
+
+    def run(columns):
+        parts = {name: [] for name in selections}
+        for batch in tree.iterate(columns, step_size=step_size):
+            for name, function in selections.items():
+                batchsel = _selectBatch(batch, branch,
+                                        function if usesimple else None,
+                                        None if usesimple else function,
+                                        index)
+                # to_packed copies only the selected values, so that the full batch can be freed
+                parts[name].append(ak.to_packed(batchsel))
+        # concatenate once at the end (concatenating at each step is very slow)
+        return {name: ak.concatenate(p) if p else ak.Array([]) for name, p in parts.items()}
+
+    columns = _neededBranches(tree, functions, branch)
+    try:
+        result = run(columns)
+    except (AttributeError, ak.errors.FieldNotFoundError) as error:
+        if columns is None:
+            raise
+        # the selection uses a branch that was not detected: read everything instead
+        warnings.warn(f"Branch detection failed ({error}); reading all branches.")
+        result = run(None)
+    return result if asdict else result[None]
 
 # Two classes are introduced to describe respectively the binned samples and the parametric curves for the plot function.
 
@@ -121,7 +178,7 @@ class Plotter:
             if len(self.simu)>0:
                 samples = [ s.events for s in self.simu ]
                 label = [ s.label for s in self.simu ]
-                norm = [ [s.norm]*len(s.events) for s in self.simu ]
+                norm = [ np.full(len(s.events), s.norm) for s in self.simu ]
                 color = [ s.color for s in self.simu ]
                 plt.hist(samples, self.xe, density=self.density, alpha=0.75, 
                          stacked=True, color=color, label=label,weights = norm)
