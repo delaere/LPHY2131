@@ -1,0 +1,13 @@
+# Python / Jupyter
+__pycache__/
+.ipynb_checkpoints/
+
+# Locally produced ROOT ntuples and analysis outputs
+analysis/labo2/delpheAnalysisZ.root
+analysis/labo2/doubleEl2011_ntuple.root
+analysis/labo2/doubleMu2011_ntuple.root
+analysis/labo2/ppNeutralCurrentFullsim_ntuple.root
+analysis/labo3/delpheAnalysisW.root
+analysis/labo3/ppChargedCurrentFullsim_ntuple.root
+analysis/labo3/singleEl2011_ntuple.root
+analysis/labo3/singleMu2011_ntuple.root
