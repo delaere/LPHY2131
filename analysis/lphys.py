@@ -14,6 +14,13 @@ from functools import wraps
 
 # This file contains a set of helper functions used in the various Notebooks.
 
+# Compatibility with both awkward 1.x and 2.x:
+# - ak.to_packed (awkward 2) was called ak.packed in awkward 1.
+_pack = getattr(ak, "to_packed", None) or getattr(ak, "packed", None) or (lambda array: array)
+# - accessing a field that was not read raises AttributeError (events.x) or, for events["x"],
+#   ak.errors.FieldNotFoundError (an IndexError) in awkward 2 and ValueError in awkward 1.
+_MISSING_FIELD_ERRORS = (AttributeError, LookupError, ValueError)
+
 def _neededBranches(tree, functions, branch):
     """Guess which branches must be read: the requested output branch(es) plus every
     branch name that appears in the source code of the selection functions.
@@ -72,18 +79,19 @@ def analyzeTree(tree, branch, simpleselection=None, selection=None, index=None, 
                                         None if usesimple else function,
                                         index)
                 # to_packed copies only the selected values, so that the full batch can be freed
-                parts[name].append(ak.to_packed(batchsel))
+                parts[name].append(_pack(batchsel))
         # concatenate once at the end (concatenating at each step is very slow)
         return {name: ak.concatenate(p) if p else ak.Array([]) for name, p in parts.items()}
 
     columns = _neededBranches(tree, functions, branch)
     try:
         result = run(columns)
-    except (AttributeError, ak.errors.FieldNotFoundError) as error:
+    except _MISSING_FIELD_ERRORS as error:
         if columns is None:
             raise
-        # the selection uses a branch that was not detected: read everything instead
-        warnings.warn(f"Branch detection failed ({error}); reading all branches.")
+        # probably the selection uses a branch that was not detected: read everything instead.
+        # (if the error has another cause, it will happen again and be reported normally)
+        warnings.warn(f"Selection failed with only the detected branches ({error}); retrying with all branches.")
         result = run(None)
     return result if asdict else result[None]
 
